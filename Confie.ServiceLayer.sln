@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{1D8E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confie.WesternGeneral", "src\Libraries\Domains\Vendors\Confie.WesternGeneral\Confie.WesternGeneral.csproj", "{BC5E4DDB-34B5-4A96-BA8F-73EDC9F2DB1C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F6428CE1-70C1-41F4-B5B4-CF7FA42D691A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confie.Infrastructure", "src\Libraries\Infrastructure\Confie.Infrastructure\Confie.Infrastructure.csproj", "{495B42A0-F18F-4DE2-83BC-646A9154D2D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,10 @@ Global
 		{BC5E4DDB-34B5-4A96-BA8F-73EDC9F2DB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC5E4DDB-34B5-4A96-BA8F-73EDC9F2DB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC5E4DDB-34B5-4A96-BA8F-73EDC9F2DB1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{495B42A0-F18F-4DE2-83BC-646A9154D2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{495B42A0-F18F-4DE2-83BC-646A9154D2D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{495B42A0-F18F-4DE2-83BC-646A9154D2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{495B42A0-F18F-4DE2-83BC-646A9154D2D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -29,6 +37,8 @@ Global
 		{E65C57EB-B5F9-4A6C-83AC-B2E35D2153D7} = {1D8E2C4C-9217-487B-99D3-BF1138AC3A67}
 		{1D8E2C4C-9217-487B-99D3-BF1138AC3A67} = {7427ECD9-7E6A-4053-806C-E92C678082D6}
 		{BC5E4DDB-34B5-4A96-BA8F-73EDC9F2DB1C} = {E65C57EB-B5F9-4A6C-83AC-B2E35D2153D7}
+		{F6428CE1-70C1-41F4-B5B4-CF7FA42D691A} = {7427ECD9-7E6A-4053-806C-E92C678082D6}
+		{495B42A0-F18F-4DE2-83BC-646A9154D2D8} = {F6428CE1-70C1-41F4-B5B4-CF7FA42D691A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4BE1519-0E8F-46D8-99CE-10FE92A35802}
