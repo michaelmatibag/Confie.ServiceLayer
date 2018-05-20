@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Confie.WesternGeneral
+namespace Confie.WesternGeneral.FlatFile
 {
     public class PaymentTransactions
     {
