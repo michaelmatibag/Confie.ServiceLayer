@@ -3,7 +3,8 @@ using FileHelpers;
 
 namespace Confie.WesternGeneral.FlatFile
 {
-    [FixedLengthRecord]
+    [FixedLengthRecord(FixedMode.AllowLessChars)]
+    [IgnoreEmptyLines]
     public class Claim
     {
         [FieldFixedLength(50)]
@@ -11,15 +12,16 @@ namespace Confie.WesternGeneral.FlatFile
         public string ClaimId { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime LossDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime ReportedDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldNullValue(typeof(DateTime), "0001/01/01 12:00AM")]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime ClosedDate { get; set; }
 
         [FieldFixedLength(30)]
@@ -31,7 +33,7 @@ namespace Confie.WesternGeneral.FlatFile
         public bool ClosedWithoutPayment { get; set; }
 
         [FieldFixedLength(3)]
-        [FieldConverter(ConverterKind.Int16)]
+        [FieldConverter(ConverterKind.Int32)]
         public int PercentAtFault { get; set; }
 
         [FieldFixedLength(100)]
@@ -39,11 +41,11 @@ namespace Confie.WesternGeneral.FlatFile
         public string ClaimDescription { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime PolicyEffectiveDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime PolicyExpirationDate { get; set; }
 
         [FieldFixedLength(20)]
@@ -82,7 +84,7 @@ namespace Confie.WesternGeneral.FlatFile
         public string InsuredModel { get; set; }
 
         [FieldFixedLength(4)]
-        [FieldConverter(ConverterKind.Int16)]
+        [FieldConverter(ConverterKind.Int32)]
         public int InsuredYear { get; set; }
 
         [FieldFixedLength(17)]
