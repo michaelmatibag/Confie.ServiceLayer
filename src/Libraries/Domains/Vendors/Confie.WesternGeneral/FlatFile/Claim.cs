@@ -1,25 +1,27 @@
 ﻿using System;
 using FileHelpers;
+using FileHelpers.Events;
 
 namespace Confie.WesternGeneral.FlatFile
 {
     [FixedLengthRecord]
-    public class Claim
+    public class Claim : INotifyRead
     {
         [FieldFixedLength(50)]
         [FieldTrim(TrimMode.Right)]
         public string ClaimId { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime LossDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime ReportedDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldNullValue(typeof(DateTime), "0001/01/01 12:00AM")]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime ClosedDate { get; set; }
 
         [FieldFixedLength(30)]
@@ -31,7 +33,7 @@ namespace Confie.WesternGeneral.FlatFile
         public bool ClosedWithoutPayment { get; set; }
 
         [FieldFixedLength(3)]
-        [FieldConverter(ConverterKind.Int16)]
+        [FieldConverter(ConverterKind.Int32)]
         public int PercentAtFault { get; set; }
 
         [FieldFixedLength(100)]
@@ -39,18 +41,18 @@ namespace Confie.WesternGeneral.FlatFile
         public string ClaimDescription { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime PolicyEffectiveDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime PolicyExpirationDate { get; set; }
 
         [FieldFixedLength(20)]
         [FieldTrim(TrimMode.Right)]
         public string PolicyNumber { get; set; }
 
-        [FieldFixedLength(20)]
+        [FieldFixedLength(19)]
         [FieldTrim(TrimMode.Right)]
         public string LineOfBusiness { get; set; }
 
@@ -82,7 +84,7 @@ namespace Confie.WesternGeneral.FlatFile
         public string InsuredModel { get; set; }
 
         [FieldFixedLength(4)]
-        [FieldConverter(ConverterKind.Int16)]
+        [FieldConverter(ConverterKind.Int32)]
         public int InsuredYear { get; set; }
 
         [FieldFixedLength(17)]
@@ -108,5 +110,18 @@ namespace Confie.WesternGeneral.FlatFile
         [FieldFixedLength(17)]
         [FieldConverter(ConverterKind.Decimal)]
         public decimal TotalIncurredLoss { get; set; }
+
+        public void BeforeRead(BeforeReadEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(e.RecordLine) || e.RecordLine.Equals("\u001a"))
+            {
+                e.SkipThisRecord = true;
+            }
+        }
+
+        public void AfterRead(AfterReadEventArgs e)
+        {
+            //Do nothing.
+        }
     }
 }
