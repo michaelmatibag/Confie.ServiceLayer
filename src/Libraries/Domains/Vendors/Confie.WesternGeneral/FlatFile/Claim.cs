@@ -1,11 +1,11 @@
 ﻿using System;
 using FileHelpers;
+using FileHelpers.Events;
 
 namespace Confie.WesternGeneral.FlatFile
 {
-    [FixedLengthRecord(FixedMode.AllowLessChars)]
-    [IgnoreEmptyLines]
-    public class Claim
+    [FixedLengthRecord]
+    public class Claim : INotifyRead
     {
         [FieldFixedLength(50)]
         [FieldTrim(TrimMode.Right)]
@@ -52,7 +52,7 @@ namespace Confie.WesternGeneral.FlatFile
         [FieldTrim(TrimMode.Right)]
         public string PolicyNumber { get; set; }
 
-        [FieldFixedLength(20)]
+        [FieldFixedLength(19)]
         [FieldTrim(TrimMode.Right)]
         public string LineOfBusiness { get; set; }
 
@@ -110,5 +110,18 @@ namespace Confie.WesternGeneral.FlatFile
         [FieldFixedLength(17)]
         [FieldConverter(ConverterKind.Decimal)]
         public decimal TotalIncurredLoss { get; set; }
+
+        public void BeforeRead(BeforeReadEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(e.RecordLine) || e.RecordLine.Equals("\u001a"))
+            {
+                e.SkipThisRecord = true;
+            }
+        }
+
+        public void AfterRead(AfterReadEventArgs e)
+        {
+            //Do nothing.
+        }
     }
 }
