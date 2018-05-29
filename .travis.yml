@@ -4,5 +4,5 @@ install:
   - nuget restore Confie.ServiceLayer.sln
   - nuget install NUnit.ConsoleRunner -Version 3.8.0 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release Confie.ServiceLayer.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./src/Libraries/Infrastructure/Confie.Infrastructure.Tests/bin/Release/Confie.Infrastructure.Tests.dll
+  - xbuild /p:Configuration=Debug Confie.ServiceLayer.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./src/Libraries/Infrastructure/Confie.Infrastructure.Tests/bin/Debug/Confie.Infrastructure.Tests.dll
