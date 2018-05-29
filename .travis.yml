@@ -2,7 +2,7 @@ language: csharp
 solution: Confie.ServiceLayer.sln
 install:
   - nuget restore Confie.ServiceLayer.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  - nuget install NUnit.Console -Version 3.10.1 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Confie.ServiceLayer.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./src/Libraries/Infrastructure/Confie.Infrastructure.Tests/bin/Release/Confie.Infrastructure.Tests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.10.1/tools/nunit3-console.exe ./src/Libraries/Infrastructure/Confie.Infrastructure.Tests/bin/Release/Confie.Infrastructure.Tests.dll
