@@ -113,10 +113,7 @@ namespace Confie.WesternGeneral.FlatFile
 
         public void BeforeRead(BeforeReadEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(e.RecordLine) || e.RecordLine.Equals("\u001a"))
-            {
-                e.SkipThisRecord = true;
-            }
+            e.SkipThisRecord = string.IsNullOrWhiteSpace(e.RecordLine) || e.RecordLine.Equals("\u001a");
         }
 
         public void AfterRead(AfterReadEventArgs e)
