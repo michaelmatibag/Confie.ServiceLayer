@@ -22,7 +22,7 @@ namespace Confie.Infrastructure.Tests.FileHandling
         public void ClaimReadClaims()
         {
             //Arrange
-            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, @"FileHandling\FixedFiles\Claim.txt");
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/Claim.txt");
 
             //Act
             var result = _fileHandling.ReadFile<Claim>(path);
