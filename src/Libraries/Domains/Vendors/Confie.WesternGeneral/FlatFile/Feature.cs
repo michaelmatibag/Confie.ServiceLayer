@@ -1,9 +1,11 @@
 ﻿using System;
 using FileHelpers;
+using FileHelpers.Events;
 
 namespace Confie.WesternGeneral.FlatFile
 {
-    public class Feature
+    [FixedLengthRecord]
+    public class Feature : INotifyRead
     {
         [FieldFixedLength(50)]
         [FieldTrim(TrimMode.Right)]
@@ -14,11 +16,12 @@ namespace Confie.WesternGeneral.FlatFile
         public string FeatureId { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime OpenDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldConverter(ConverterKind.Date)]
+        [FieldNullValue(typeof(DateTime), "0001/01/01 12:00AM")]
+        [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime CloseDate { get; set; }
 
         [FieldFixedLength(30)]
@@ -60,5 +63,15 @@ namespace Confie.WesternGeneral.FlatFile
         [FieldFixedLength(17)]
         [FieldConverter(ConverterKind.Decimal)]
         public decimal TotalIncurredLoss { get; set; }
+
+        public void BeforeRead(BeforeReadEventArgs e)
+        {
+            e.SkipThisRecord = string.IsNullOrWhiteSpace(e.RecordLine) || e.RecordLine.Equals("\u001a");
+        }
+
+        public void AfterRead(AfterReadEventArgs e)
+        {
+            //Do nothing.
+        }
     }
 }

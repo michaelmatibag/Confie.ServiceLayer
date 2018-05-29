@@ -57,5 +57,18 @@ namespace Confie.Infrastructure.Tests.FileHandling
             result[5586].ReservesAtEnd.ShouldBe(160000);
             result[5586].TotalIncurredLoss.ShouldBe(187000);
         }
+
+        [Test]
+        public void FeatureReadFeatures()
+        {
+            //Arrange
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/Feature.txt");
+
+            //Act
+            var result = _fileHandling.ReadFile<Feature>(path);
+
+            //Assert
+            result.ShouldNotBeNull();
+        }
     }
 }
