@@ -98,20 +98,6 @@ namespace Confie.Infrastructure.Tests.FileHandling
             //Assert
             result.ShouldNotBeNull();
             result.Length.ShouldBe(19487);
-            //result[1101].ClaimId.ShouldBe("201470000717");
-            //result[1101].CloseDate.ShouldBe(DateTime.Parse("1/1/0001 12:00:00 AM"));
-            //result[1101].ClosedWithoutPayment.ShouldBe(true);
-            //result[1101].CoverageCode.ShouldBe("BI");
-            //result[1101].CoverageSubCode.ShouldBe("BI");
-            //result[1101].Expenses.ShouldBe(516729);
-            //result[1101].FeatureId.ShouldBe("0003101");
-            //result[1101].FeatureStatus.ShouldBe("RE-OPENED");
-            //result[1101].OpenDate.ShouldBe(DateTime.Parse("10/13/2014 12:01:00 AM"));
-            //result[1101].Payments.ShouldBe(0);
-            //result[1101].Recoveries.ShouldBe(0);
-            //result[1101].ReservesAtBeginning.ShouldBe(425000);
-            //result[1101].ReservesAtEnd.ShouldBe(425000);
-            //result[1101].TotalIncurredLoss.ShouldBe(941729);
         }
 
         [Test]
@@ -126,20 +112,12 @@ namespace Confie.Infrastructure.Tests.FileHandling
             //Assert
             result.ShouldNotBeNull();
             result.Length.ShouldBe(22316);
-            //result[1101].ClaimId.ShouldBe("201470000717");
-            //result[1101].CloseDate.ShouldBe(DateTime.Parse("1/1/0001 12:00:00 AM"));
-            //result[1101].ClosedWithoutPayment.ShouldBe(true);
-            //result[1101].CoverageCode.ShouldBe("BI");
-            //result[1101].CoverageSubCode.ShouldBe("BI");
-            //result[1101].Expenses.ShouldBe(516729);
-            //result[1101].FeatureId.ShouldBe("0003101");
-            //result[1101].FeatureStatus.ShouldBe("RE-OPENED");
-            //result[1101].OpenDate.ShouldBe(DateTime.Parse("10/13/2014 12:01:00 AM"));
-            //result[1101].Payments.ShouldBe(0);
-            //result[1101].Recoveries.ShouldBe(0);
-            //result[1101].ReservesAtBeginning.ShouldBe(425000);
-            //result[1101].ReservesAtEnd.ShouldBe(425000);
-            //result[1101].TotalIncurredLoss.ShouldBe(941729);
+            result[11].ClaimId.ShouldBe("201370000007");
+            result[11].Dummy.ShouldBe("FP");
+            result[11].FeatureId.ShouldBe("0002110");
+            result[11].ReserveAfter.ShouldBe(0);
+            result[11].ReserveBefore.ShouldBe(189180);
+            result[11].ReserveChangeDate.ShouldBe(DateTime.Parse("1/22/2014 12:02:00 AM"));
         }
     }
 }
