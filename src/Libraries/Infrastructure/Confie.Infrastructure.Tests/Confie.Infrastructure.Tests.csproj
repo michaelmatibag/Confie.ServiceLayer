@@ -53,10 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FileHandling\FixedFiles\Claim.txt">
+    <Content Include="FileHandling\FixedFiles\Claims.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="FileHandling\FixedFiles\Feature.txt">
+    <Content Include="FileHandling\FixedFiles\Features.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="FileHandling\FixedFiles\PaymentTransactions.txt">
