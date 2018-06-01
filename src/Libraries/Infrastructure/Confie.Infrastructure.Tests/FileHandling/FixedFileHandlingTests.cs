@@ -19,10 +19,10 @@ namespace Confie.Infrastructure.Tests.FileHandling
         }
 
         [Test]
-        public void ClaimReadClaims()
+        public void Claim_FileHandler_Reads_Claims()
         {
             //Arrange
-            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/Claim.txt");
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/Claims.txt");
 
             //Act
             var result = _fileHandling.ReadFile<Claim>(path);
@@ -59,16 +59,87 @@ namespace Confie.Infrastructure.Tests.FileHandling
         }
 
         [Test]
-        public void FeatureReadFeatures()
+        public void Feature_FileHandler_Reads_Features()
         {
             //Arrange
-            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/Feature.txt");
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/Features.txt");
 
             //Act
             var result = _fileHandling.ReadFile<Feature>(path);
 
             //Assert
             result.ShouldNotBeNull();
+            result.Length.ShouldBe(12417);
+            result[1101].ClaimId.ShouldBe("201470000717");
+            result[1101].CloseDate.ShouldBe(DateTime.Parse("1/1/0001 12:00:00 AM"));
+            result[1101].ClosedWithoutPayment.ShouldBe(true);
+            result[1101].CoverageCode.ShouldBe("BI");
+            result[1101].CoverageSubCode.ShouldBe("BI");
+            result[1101].Expenses.ShouldBe(516729);
+            result[1101].FeatureId.ShouldBe("0003101");
+            result[1101].FeatureStatus.ShouldBe("RE-OPENED");
+            result[1101].OpenDate.ShouldBe(DateTime.Parse("10/13/2014 12:01:00 AM"));
+            result[1101].Payments.ShouldBe(0);
+            result[1101].Recoveries.ShouldBe(0);
+            result[1101].ReservesAtBeginning.ShouldBe(425000);
+            result[1101].ReservesAtEnd.ShouldBe(425000);
+            result[1101].TotalIncurredLoss.ShouldBe(941729);
+        }
+
+        [Test]
+        public void PaymentTransaction_FileHandler_Reads_PaymentTransactions()
+        {
+            //Arrange
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/PaymentTransactions.txt");
+
+            //Act
+            var result = _fileHandling.ReadFile<PaymentTransaction>(path);
+
+            //Assert
+            result.ShouldNotBeNull();
+            result.Length.ShouldBe(19487);
+            //result[1101].ClaimId.ShouldBe("201470000717");
+            //result[1101].CloseDate.ShouldBe(DateTime.Parse("1/1/0001 12:00:00 AM"));
+            //result[1101].ClosedWithoutPayment.ShouldBe(true);
+            //result[1101].CoverageCode.ShouldBe("BI");
+            //result[1101].CoverageSubCode.ShouldBe("BI");
+            //result[1101].Expenses.ShouldBe(516729);
+            //result[1101].FeatureId.ShouldBe("0003101");
+            //result[1101].FeatureStatus.ShouldBe("RE-OPENED");
+            //result[1101].OpenDate.ShouldBe(DateTime.Parse("10/13/2014 12:01:00 AM"));
+            //result[1101].Payments.ShouldBe(0);
+            //result[1101].Recoveries.ShouldBe(0);
+            //result[1101].ReservesAtBeginning.ShouldBe(425000);
+            //result[1101].ReservesAtEnd.ShouldBe(425000);
+            //result[1101].TotalIncurredLoss.ShouldBe(941729);
+        }
+
+        [Test]
+        public void ReserveTransaction_FileHandler_Reads_ReserveTransactions()
+        {
+            //Arrange
+            var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "FileHandling/FixedFiles/ReserveTransactions.txt");
+
+            //Act
+            var result = _fileHandling.ReadFile<ReserveTransaction>(path);
+
+            //Assert
+            result.ShouldNotBeNull();
+            result.Length.ShouldBe(22316);
+            //result[1101].ClaimId.ShouldBe("201470000717");
+            //result[1101].CloseDate.ShouldBe(DateTime.Parse("1/1/0001 12:00:00 AM"));
+            //result[1101].ClosedWithoutPayment.ShouldBe(true);
+            //result[1101].CoverageCode.ShouldBe("BI");
+            //result[1101].CoverageSubCode.ShouldBe("BI");
+            //result[1101].Expenses.ShouldBe(516729);
+            //result[1101].FeatureId.ShouldBe("0003101");
+            //result[1101].FeatureStatus.ShouldBe("RE-OPENED");
+            //result[1101].OpenDate.ShouldBe(DateTime.Parse("10/13/2014 12:01:00 AM"));
+            //result[1101].Payments.ShouldBe(0);
+            //result[1101].Recoveries.ShouldBe(0);
+            //result[1101].ReservesAtBeginning.ShouldBe(425000);
+            //result[1101].ReservesAtEnd.ShouldBe(425000);
+            //result[1101].TotalIncurredLoss.ShouldBe(941729);
         }
     }
 }
