@@ -27,6 +27,11 @@ namespace Confie.WesternGeneral.FlatFile
         [FieldConverter(ConverterKind.Decimal)]
         public decimal ReserveAfter { get; set; }
 
+        [FieldFixedLength(20)]
+        [FieldOptional]
+        [FieldTrim(TrimMode.Both)]
+        public string Dummy { get; set; }
+
         public void BeforeRead(BeforeReadEventArgs e)
         {
             e.SkipThisRecord = string.IsNullOrWhiteSpace(e.RecordLine) || e.RecordLine.Equals("\u001a");
