@@ -31,7 +31,7 @@ namespace Confie.WesternGeneral.FlatFile
         [FieldTrim(TrimMode.Right)]
         public string PaymentType { get; set; }
 
-        [FieldFixedLength(50)]
+        [FieldFixedLength(30)]
         [FieldTrim(TrimMode.Right)]
         public string RecoveryType { get; set; }
 
@@ -53,6 +53,11 @@ namespace Confie.WesternGeneral.FlatFile
         [FieldFixedLength(10)]
         [FieldTrim(TrimMode.Right)]
         public string PaymentZip { get; set; }
+
+        [FieldFixedLength(20)]
+        [FieldOptional]
+        [FieldTrim(TrimMode.Both)]
+        public string Dummy { get; set; }
 
         public void BeforeRead(BeforeReadEventArgs e)
         {
