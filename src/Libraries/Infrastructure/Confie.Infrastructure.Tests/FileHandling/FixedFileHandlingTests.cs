@@ -98,6 +98,19 @@ namespace Confie.Infrastructure.Tests.FileHandling
             //Assert
             result.ShouldNotBeNull();
             result.Length.ShouldBe(19487);
+            result[14969].CheckNumber.ShouldBe("0421573");
+            result[14969].ClaimId.ShouldBe("201670006018");
+            result[14969].Dummy.ShouldBe("FP");
+            result[14969].FeatureId.ShouldBe("0002101");
+            result[14969].PaymentAddress.ShouldBe("5230 LAS VIRGENES ROAD #100");
+            result[14969].PaymentAmount.ShouldBe(27000);
+            result[14969].PaymentCity.ShouldBe("CALABASAS");
+            result[14969].PaymentDate.ShouldBe(DateTime.Parse("7/20/2017 12:01:00 AM"));
+            result[14969].PaymentState.ShouldBe("CA");
+            result[14969].PaymentStatus.ShouldBe("POSTED");
+            result[14969].PaymentType.ShouldBe("Expense");
+            result[14969].PaymentZip.ShouldBe("91302");
+            result[14969].RecoveryType.ShouldBe(string.Empty);
         }
 
         [Test]
