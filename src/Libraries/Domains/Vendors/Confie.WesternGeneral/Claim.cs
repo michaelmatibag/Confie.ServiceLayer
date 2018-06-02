@@ -7,7 +7,7 @@ namespace Confie.WesternGeneral
     {
         public string ClaimId { get; set; }
         public DateTime LossDate { get; set; }
-        public System.DateTime ReportedDate { get; set; }
+        public DateTime ReportedDate { get; set; }
         public DateTime ClosedDate { get; set; }
         public string ClaimStatus { get; set; }
         public bool ClosedWithoutPayment { get; set; }
