@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Claim.cs" />
     <Compile Include="ClaimsRepository\ClaimsContext.cs" />
+    <Compile Include="ClaimsRepository\ClaimsRepository.cs" />
     <Compile Include="ClaimsRepository\IClaimsRepository.cs" />
     <Compile Include="Feature.cs" />
     <Compile Include="FlatFile\Claim.cs" />
