@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Confie.WesternGeneral
+namespace Confie.WesternGeneral.ClaimsRepository
 {
     public class ClaimsContext : DbContext
     {
