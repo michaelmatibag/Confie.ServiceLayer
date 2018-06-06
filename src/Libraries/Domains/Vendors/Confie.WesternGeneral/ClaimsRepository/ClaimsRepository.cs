@@ -18,42 +18,7 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    _claimsContext.Claims.Add(new Claim
-                    {
-                        ClaimDescription = claim.ClaimDescription,
-                        ClaimId = claim.ClaimId,
-                        ClaimStatus = claim.ClaimStatus,
-                        ClosedDate = claim.ClosedDate,
-                        ClosedWithoutPayment = claim.ClosedWithoutPayment,
-                        DriverFirstName = claim.DriverFirstName,
-                        DriverLastName = claim.DriverLastName,
-                        DriverLicenseId = claim.DriverLicenseId,
-                        DriverLicenseState = claim.DriverLicenseState,
-                        Expenses = claim.Expenses,
-                        InsuredMake = claim.InsuredMake,
-                        InsuredModel = claim.InsuredModel,
-                        InsuredVin = claim.InsuredVin,
-                        InsuredYear = claim.InsuredYear,
-                        LineOfBusiness = claim.LineOfBusiness,
-                        LossDate = claim.LossDate,
-                        Payments = claim.Payments,
-                        PercentAtFault = claim.PercentAtFault,
-                        PolicyEffectiveDate = claim.PolicyEffectiveDate,
-                        PolicyExpirationDate = claim.PolicyExpirationDate,
-                        PolicyNumber = claim.PolicyNumber,
-                        Recoveries = claim.Recoveries,
-                        ReportedDate = claim.ReportedDate,
-                        ReservesAtBeginning = claim.ReservesAtBeginning,
-                        ReservesAtEnd = claim.ReservesAtEnd,
-                        SubmissionStatus = claim.SubmissionStatus,
-                        TotalIncurredLoss = claim.TotalIncurredLoss,
-                        UpdatedDate = claim.UpdatedDate,
-                        UpdatedUser = claim.UpdatedUser,
-                        PaymentTransactions = claim.PaymentTransactions,
-                        ReserveTransactions = claim.ReserveTransactions,
-                        Features = claim.Features
-                    });
-
+                    _claimsContext.Claims.Add(claim);
                     _claimsContext.SaveChanges();
                 }
 
@@ -69,12 +34,43 @@ namespace Confie.WesternGeneral.ClaimsRepository
 
         public bool SaveClaims(IList<Claim> claims)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (_claimsContext)
+                {
+                    foreach (var claim in claims)
+                    {
+                        _claimsContext.Claims.Add(claim);
+                    }
+
+                    _claimsContext.SaveChanges();
+                }
+
+                return true;
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return false;
+            }
         }
 
         public Claim GetClaim(string claimId)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.Claims.FirstOrDefault(x => x.ClaimId == claimId);
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
         }
 
         public IList<Claim> GetClaims()
