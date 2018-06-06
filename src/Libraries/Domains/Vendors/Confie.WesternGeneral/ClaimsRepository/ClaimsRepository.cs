@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Confie.WesternGeneral.ClaimsRepository
 {
@@ -78,7 +79,19 @@ namespace Confie.WesternGeneral.ClaimsRepository
 
         public IList<Claim> GetClaims()
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.Claims.ToList();
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
         }
     }
 }
