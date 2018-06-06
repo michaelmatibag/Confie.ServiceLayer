@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Confie.Infrastructure.FileHandling;
-using Confie.WesternGeneral.FlatFile;
+using Confie.WesternGeneral;
 using NUnit.Framework;
 using Shouldly;
 
