@@ -4,7 +4,6 @@ using Confie.Infrastructure.FileHandling;
 using Confie.WesternGeneral;
 using NUnit.Framework;
 using Shouldly;
-using PaymentTransaction = Confie.WesternGeneral.FlatFile.PaymentTransaction;
 using ReserveTransaction = Confie.WesternGeneral.FlatFile.ReserveTransaction;
 
 namespace Confie.Infrastructure.Tests.FileHandling

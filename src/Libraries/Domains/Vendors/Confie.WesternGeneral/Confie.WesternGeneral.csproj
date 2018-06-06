@@ -55,7 +55,6 @@
     <Compile Include="ClaimsRepository\ClaimsRepository.cs" />
     <Compile Include="ClaimsRepository\IClaimsRepository.cs" />
     <Compile Include="Feature.cs" />
-    <Compile Include="FlatFile\PaymentTransaction.cs" />
     <Compile Include="PaymentTransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FlatFile\ReserveTransaction.cs" />
