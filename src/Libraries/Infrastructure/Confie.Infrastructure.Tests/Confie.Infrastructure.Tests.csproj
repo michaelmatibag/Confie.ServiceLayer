@@ -89,6 +89,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Domains\Vendors\Confie.PolicyOne\Confie.PolicyOne.csproj">
+      <Project>{AF63A59D-8492-4C54-A677-7866B42AAB41}</Project>
+      <Name>Confie.PolicyOne</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Domains\Vendors\Confie.WesternGeneral\Confie.WesternGeneral.csproj">
       <Project>{bc5e4ddb-34b5-4a96-ba8f-73edc9f2db1c}</Project>
       <Name>Confie.WesternGeneral</Name>
