@@ -52,6 +52,6 @@ namespace Confie.PolicyOne
         public string AccidentType { get; set; }
 
         [JsonProperty("features")]
-        public List<Feature> Features { get; set; }
+        public IList<Feature> Features { get; set; }
     }
 }

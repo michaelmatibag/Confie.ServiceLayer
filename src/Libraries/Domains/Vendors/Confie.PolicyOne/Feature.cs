@@ -43,6 +43,6 @@ namespace Confie.PolicyOne
         public List<Payment> Payments { get; set; }
 
         [JsonProperty("reserves")]
-        public List<Reserve> Reserves { get; set; }
+        public IList<Reserve> Reserves { get; set; }
     }
 }
