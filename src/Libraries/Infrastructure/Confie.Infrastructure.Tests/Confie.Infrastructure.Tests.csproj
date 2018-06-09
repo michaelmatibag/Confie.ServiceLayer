@@ -62,6 +62,7 @@
     <Compile Include="Configuration\ConfigurationTests.cs" />
     <Compile Include="Configuration\ITestConfiguration.cs" />
     <Compile Include="FileHandling\FixedFileHandlingTests.cs" />
+    <Compile Include="JsonHandling\JsonHandlingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="JsonHandling\JsonFiles\PolicyOneClaims.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
