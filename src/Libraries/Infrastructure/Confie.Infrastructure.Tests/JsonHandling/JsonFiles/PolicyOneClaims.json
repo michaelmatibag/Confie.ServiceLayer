@@ -28,7 +28,7 @@
         "expirationDate": "2018-03-20T17:04:50.328Z",
         "number": "string"
       },
-      "claimId": "string",
+      "claimId": "TESTCLAIMID",
       "number": "string",
       "importedTimezoneId": 0,
       "lossDate": "2018-03-20T17:04:50.328Z",
@@ -41,7 +41,7 @@
       "accidentType": "string",
       "features": [
         {
-          "claimFeatureId": "string",
+          "claimFeatureId": "TESTCLAIMFEATUREID",
           "openDate": "2018-03-20T17:04:50.328Z",
           "closedDate": "2018-03-20T17:04:50.328Z",
           "status": "unknown",
@@ -81,7 +81,7 @@
           },
           "payments": [
             {
-              "paymentId": "string",
+              "paymentId": "TESTPAYMENTID",
               "date": "2018-03-20T17:04:50.328Z",
               "amount": 0,
               "status": "unknown",
@@ -99,7 +99,7 @@
           ],
           "reserves": [
             {
-              "claimReserveId": "string",
+              "claimReserveId": "TESTCLAIMRESERVEID",
               "changeDate": "2018-03-20T17:04:50.328Z",
               "amount": 0
             }
