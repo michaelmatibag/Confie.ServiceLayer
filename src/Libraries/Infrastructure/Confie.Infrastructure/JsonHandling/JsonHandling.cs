@@ -4,21 +4,21 @@ namespace Confie.Infrastructure.JsonHandling
 {
     public class JsonHandling : IJsonHandling
     {
-        private readonly JsonSerializerSettings _jsonSerializerSettings;
+        private readonly IConverter _converter;
 
-        public JsonHandling(JsonSerializerSettings jsonSerializerSettings)
+        public JsonHandling(IConverter converter)
         {
-            _jsonSerializerSettings = jsonSerializerSettings;
+            _converter = converter;
         }
 
         public T FromJson<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json, _jsonSerializerSettings);
+            return JsonConvert.DeserializeObject<T>(json, _converter.Settings());
         }
 
         public string ToJson<T>(T input)
         {
-            return JsonConvert.SerializeObject(input, _jsonSerializerSettings);
+            return JsonConvert.SerializeObject(input, _converter.Settings());
         }
     }
 }
