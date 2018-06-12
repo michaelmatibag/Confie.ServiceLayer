@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Confie.WesternGeneral;
 using Confie.WesternGeneral.ClaimsRepository;
 using NUnit.Framework;
 using Rhino.Mocks;
 using Shouldly;
 
-namespace Confie.WesternGeneral.Tests.ClaimsRepository
+namespace Confie.Vendors.UnitTests.WesternGeneral.ClaimsRepository
 {
     [TestFixture]
     public class ClaimsRepositoryTests
@@ -28,7 +29,7 @@ namespace Confie.WesternGeneral.Tests.ClaimsRepository
             //Arrange
             _claimsContext.Stub(x => x.Claims).Return(_dbSetClaim);
 
-            var claimsRepository = new WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContext);
+            var claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContext);
             var claim = StubClaim();
 
             //Act
@@ -52,7 +53,7 @@ namespace Confie.WesternGeneral.Tests.ClaimsRepository
             _dbSetClaim.Stub(x => x.GetEnumerator()).Return(claims.GetEnumerator());
             _claimsContext.Stub(x => x.Claims).Return(_dbSetClaim);
 
-            var claimsRepository = new WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContext);
+            var claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContext);
 
             //Act
             var result = claimsRepository.GetClaims();
