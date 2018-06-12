@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confie.Vendors.UnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confie.Infrastructure.UnitTests", "src\Libraries\Infrastructure\Confie.Infrastructure.UnitTests\Confie.Infrastructure.UnitTests.csproj", "{590EBB7C-97F6-426A-B66B-7056F04DEE6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confie.Integration.IntegrationTests", "src\Libraries\Integration\Confie.Integration.IntegrationTests\Confie.Integration.IntegrationTests.csproj", "{07E26252-7A0A-455E-A6EC-BF2CA1A7698C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{590EBB7C-97F6-426A-B66B-7056F04DEE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{590EBB7C-97F6-426A-B66B-7056F04DEE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{590EBB7C-97F6-426A-B66B-7056F04DEE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07E26252-7A0A-455E-A6EC-BF2CA1A7698C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E26252-7A0A-455E-A6EC-BF2CA1A7698C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E26252-7A0A-455E-A6EC-BF2CA1A7698C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E26252-7A0A-455E-A6EC-BF2CA1A7698C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{AF63A59D-8492-4C54-A677-7866B42AAB41} = {E65C57EB-B5F9-4A6C-83AC-B2E35D2153D7}
 		{F4DAC76C-479C-4AAF-BACB-647DA7BFBECF} = {E65C57EB-B5F9-4A6C-83AC-B2E35D2153D7}
 		{590EBB7C-97F6-426A-B66B-7056F04DEE6D} = {F6428CE1-70C1-41F4-B5B4-CF7FA42D691A}
+		{07E26252-7A0A-455E-A6EC-BF2CA1A7698C} = {8C3F5FB9-96CE-47E3-9804-269403662971}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4BE1519-0E8F-46D8-99CE-10FE92A35802}
