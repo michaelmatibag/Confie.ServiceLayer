@@ -1,6 +1,6 @@
 ﻿using Config.Net;
 
-namespace Confie.Infrastructure.Tests.Configuration
+namespace Confie.Infrastructure.UnitTests.Configuration
 {
     public interface ITestConfiguration
     {

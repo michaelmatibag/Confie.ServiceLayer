@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Shouldly;
 
-namespace Confie.Infrastructure.Tests.Configuration
+namespace Confie.Infrastructure.UnitTests.Configuration
 {
     [TestFixture]
     public class ConfigurationTests

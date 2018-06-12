@@ -4,7 +4,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Shouldly;
 
-namespace Confie.Integration.Tests.RestExecutor
+namespace Confie.Integration.IntegrationTests.RestExecutor
 {
     [TestFixture]
     public class RestExecutorTests

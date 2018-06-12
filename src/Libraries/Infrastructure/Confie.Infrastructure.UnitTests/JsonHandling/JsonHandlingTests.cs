@@ -9,7 +9,7 @@ using NUnit.Framework;
 using Rhino.Mocks;
 using Shouldly;
 
-namespace Confie.Infrastructure.Tests.JsonHandling
+namespace Confie.Infrastructure.UnitTests.JsonHandling
 {
     [TestFixture]
     public class JsonHandlingTests

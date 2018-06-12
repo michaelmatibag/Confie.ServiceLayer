@@ -5,7 +5,7 @@ using Confie.WesternGeneral;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Confie.Infrastructure.Tests.FileHandling
+namespace Confie.Infrastructure.UnitTests.FileHandling
 {
     [TestFixture]
     public class FixedFileHandlingTests
