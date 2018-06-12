@@ -97,7 +97,7 @@ namespace Confie.WesternGeneral.Tests.ClaimsRepository
             };
         }
 
-        private IQueryable<Claim> StubClaims()
+        private static IQueryable<Claim> StubClaims()
         {
             return new List<Claim>
             {
