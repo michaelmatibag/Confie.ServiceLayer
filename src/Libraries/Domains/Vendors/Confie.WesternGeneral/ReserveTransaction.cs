@@ -39,7 +39,7 @@ namespace Confie.WesternGeneral
         public string UpdatedUser { get; set; }
 
         [FieldHidden]
-        public string UpdatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
 
         [FieldHidden]
         public virtual Claim Claim { get; set; }
