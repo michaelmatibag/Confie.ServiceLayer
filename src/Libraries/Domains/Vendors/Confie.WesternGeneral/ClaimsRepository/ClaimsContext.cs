@@ -19,6 +19,8 @@ namespace Confie.WesternGeneral.ClaimsRepository
             modelBuilder.Entity<Claim>()
                 .HasKey(c => c.ClaimId);
             modelBuilder.Entity<Claim>()
+                .Property(c => c.SubmissionStatus).IsRequired();
+            modelBuilder.Entity<Claim>()
                 .Property(c => c.UpdatedUser).IsRequired();
             modelBuilder.Entity<Claim>()
                 .Property(c => c.UpdatedDate).IsRequired();

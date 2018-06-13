@@ -113,7 +113,7 @@ namespace Confie.WesternGeneral
         public decimal TotalIncurredLoss { get; set; }
 
         [FieldHidden]
-        public string SubmissionStatus { get; set; }
+        public SubmissionStatus SubmissionStatus { get; set; }
 
         [FieldHidden]
         public string UpdatedUser { get; set; }
