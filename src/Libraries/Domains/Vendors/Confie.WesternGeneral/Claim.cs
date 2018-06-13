@@ -21,7 +21,7 @@ namespace Confie.WesternGeneral
         public DateTime ReportedDate { get; set; }
 
         [FieldFixedLength(18)]
-        [FieldNullValue(typeof(DateTime), "0001/01/01 12:00AM")]
+        [FieldNullValue(typeof(DateTime), "1/1/1753 12:00:00 AM")]
         [FieldConverter(ConverterKind.Date, "yyyy/MM/dd hh:mmtt")]
         public DateTime ClosedDate { get; set; }
 
