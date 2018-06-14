@@ -13,5 +13,10 @@ namespace Confie.WesternGeneral.ClaimsRepository
         Feature GetFeature(string featureId);
         IList<Feature> GetFeatures();
         IList<Feature> GetFeatures(string claimId);
+        bool SavePaymentTransaction(PaymentTransaction paymentTransaction);
+        bool SavePaymentTransactions(IList<PaymentTransaction> paymentTransactions);
+        PaymentTransaction GetPaymentTransaction(int paymentTransactionId);
+        IList<PaymentTransaction> GetPaymentTransactions(string featureId);
+        IList<PaymentTransaction> GetPaymentTransactions();
     }
 }

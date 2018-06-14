@@ -190,5 +190,100 @@ namespace Confie.WesternGeneral.ClaimsRepository
                 return null;
             }
         }
+
+        public bool SavePaymentTransaction(PaymentTransaction paymentTransaction)
+        {
+            try
+            {
+                using (_claimsContext)
+                {
+                    _claimsContext.PaymentTransactions.Add(paymentTransaction);
+                    _claimsContext.SaveChanges();
+                }
+
+                return true;
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return false;
+            }
+        }
+
+        public bool SavePaymentTransactions(IList<PaymentTransaction> paymentTransactions)
+        {
+            try
+            {
+                using (_claimsContext)
+                {
+                    foreach (var paymentTransaction in paymentTransactions)
+                    {
+                        _claimsContext.PaymentTransactions.Add(paymentTransaction);
+                    }
+
+                    _claimsContext.SaveChanges();
+                }
+
+                return true;
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return false;
+            }
+        }
+
+        public PaymentTransaction GetPaymentTransaction(int paymentTransactionId)
+        {
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.PaymentTransactions.FirstOrDefault(x => x.PaymentTransactionId == paymentTransactionId);
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
+        }
+
+        public IList<PaymentTransaction> GetPaymentTransactions(string featureId)
+        {
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.PaymentTransactions.Where(x => x.FeatureId == featureId).ToList();
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
+        }
+
+        public IList<PaymentTransaction> GetPaymentTransactions()
+        {
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.PaymentTransactions.ToList();
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
+        }
     }
 }
