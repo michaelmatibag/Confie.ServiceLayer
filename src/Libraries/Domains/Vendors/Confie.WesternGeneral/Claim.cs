@@ -122,7 +122,7 @@ namespace Confie.WesternGeneral
         public DateTime UpdatedDate { get; set; }
 
         [FieldHidden]
-        public virtual List<Feature> Features { get; set; }
+        public virtual IList<Feature> Features { get; set; }
 
         [FieldHidden]
         public virtual List<PaymentTransaction> PaymentTransactions { get; set; }

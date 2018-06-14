@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Confie.WesternGeneral.ClaimsRepository
@@ -63,7 +62,13 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.Claims.FirstOrDefault(x => x.ClaimId == claimId);
+                    var claim = _claimsContext.Claims.FirstOrDefault(x => x.ClaimId == claimId);
+
+                    if (claim == null) return null;
+
+                    claim.Features = GetFeatures(claimId);
+
+                    return claim;
                 }
             }
             catch
