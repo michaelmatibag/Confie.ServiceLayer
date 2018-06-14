@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using System.IO;
 using Confie.Infrastructure.FileHandling;
 using Confie.WesternGeneral;
@@ -33,7 +34,7 @@ namespace Confie.Infrastructure.UnitTests.FileHandling
             result[5586].ClaimDescription.ShouldBe("PD-OUR INSURED REAR ENDED OTHER PARTY  OUR INSURED");
             result[5586].ClaimId.ShouldBe("201670005692");
             result[5586].ClaimStatus.ShouldBe("RO");
-            result[5586].ClosedDate.ShouldBe(DateTime.MinValue);
+            result[5586].ClosedDate.ShouldBe(DateTime.Parse(SqlDateTime.MinValue.ToString()));
             result[5586].ClosedWithoutPayment.ShouldBe(false);
             result[5586].DriverFirstName.ShouldBe("HUGO");
             result[5586].DriverLastName.ShouldBe("RAMIREZ");
@@ -71,7 +72,7 @@ namespace Confie.Infrastructure.UnitTests.FileHandling
             result.ShouldNotBeNull();
             result.Length.ShouldBe(12417);
             result[1101].ClaimId.ShouldBe("201470000717");
-            result[1101].CloseDate.ShouldBe(DateTime.Parse("1/1/0001 12:00:00 AM"));
+            result[1101].CloseDate.ShouldBe(DateTime.Parse(SqlDateTime.MinValue.ToString()));
             result[1101].ClosedWithoutPayment.ShouldBe(true);
             result[1101].CoverageCode.ShouldBe("BI");
             result[1101].CoverageSubCode.ShouldBe("BI");
