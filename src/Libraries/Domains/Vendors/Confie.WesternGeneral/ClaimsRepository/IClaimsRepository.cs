@@ -12,5 +12,6 @@ namespace Confie.WesternGeneral.ClaimsRepository
         bool SaveFeatures(IList<Feature> features);
         Feature GetFeature(string featureId);
         IList<Feature> GetFeatures();
+        IList<Feature> GetFeatures(string claimId);
     }
 }

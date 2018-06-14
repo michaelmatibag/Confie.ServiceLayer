@@ -25,7 +25,7 @@ namespace Confie.WesternGeneral.ClaimsRepository
 
                 return true;
             }
-            catch (Exception e)
+            catch
             {
                 //TODO:  Add logging.
 
@@ -93,22 +93,97 @@ namespace Confie.WesternGeneral.ClaimsRepository
 
         public bool SaveFeature(Feature feature)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (_claimsContext)
+                {
+                    _claimsContext.Features.Add(feature);
+                    _claimsContext.SaveChanges();
+                }
+
+                return true;
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return false;
+            }
         }
 
         public bool SaveFeatures(IList<Feature> features)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (_claimsContext)
+                {
+                    foreach (var feature in features)
+                    {
+                        _claimsContext.Features.Add(feature);
+                    }
+                    
+                    _claimsContext.SaveChanges();
+                }
+
+                return true;
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return false;
+            }
         }
 
         public Feature GetFeature(string featureId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.Features.FirstOrDefault(x => x.FeatureId == featureId);
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
         }
 
         public IList<Feature> GetFeatures()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.Features.ToList();
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
+        }
+
+        public IList<Feature> GetFeatures(string claimId)
+        {
+            try
+            {
+                using (_claimsContext)
+                {
+                    return _claimsContext.Features.Where(x => x.ClaimId == claimId).ToList();
+                }
+            }
+            catch
+            {
+                //TODO:  Add logging.
+
+                return null;
+            }
         }
     }
 }
