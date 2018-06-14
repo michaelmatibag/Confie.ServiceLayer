@@ -44,6 +44,8 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             //Assert
             result.Count.ShouldBe(1);
             result[0].ClaimId.ShouldBe("201670005692");
+            result[0].Features.Count.ShouldBe(1);
+            result[0].Features[0].FeatureId.ShouldBe("0004110");
         }
 
         private static Claim StubClaim(string updatedUser, DateTime updatedDate)
