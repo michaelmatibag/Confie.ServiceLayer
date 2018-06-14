@@ -8,5 +8,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         bool SaveClaims(IList<Claim> claims);
         Claim GetClaim(string claimId);
         IList<Claim> GetClaims();
+        bool SaveFeature(Feature feature);
+        bool SaveFeatures(IList<Feature> features);
+        Feature GetFeature(string featureId);
+        IList<Feature> GetFeatures();
     }
 }

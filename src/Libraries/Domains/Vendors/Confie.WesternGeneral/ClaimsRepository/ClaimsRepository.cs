@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Confie.WesternGeneral.ClaimsRepository
@@ -24,7 +25,7 @@ namespace Confie.WesternGeneral.ClaimsRepository
 
                 return true;
             }
-            catch
+            catch (Exception e)
             {
                 //TODO:  Add logging.
 
@@ -88,6 +89,26 @@ namespace Confie.WesternGeneral.ClaimsRepository
 
                 return null;
             }
+        }
+
+        public bool SaveFeature(Feature feature)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SaveFeatures(IList<Feature> features)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Feature GetFeature(string featureId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Feature> GetFeatures()
+        {
+            throw new NotImplementedException();
         }
     }
 }
