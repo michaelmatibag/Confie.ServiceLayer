@@ -15,6 +15,7 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
         private ClaimsContext _claimsContext;
         private IFactory<ClaimsContext> _claimsContextFactory;
         private Confie.WesternGeneral.ClaimsRepository.ClaimsRepository _claimsRepository;
+        private string _updatedUser;
         private DateTime _updatedDate;
         private Claim _claim;
 
@@ -24,8 +25,9 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             _claimsContext = new ClaimsContext();
             _claimsContextFactory = new ClaimsContextFactory();
             _claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContextFactory);
-            _updatedDate = DateTime.Now;
-            _claim = StubClaim("TestUser", _updatedDate);
+            _updatedUser = Guid.NewGuid().ToString("N");
+            _updatedDate = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            _claim = StubClaim(_updatedUser, _updatedDate);
 
             _claimsContext.Database.Delete();
         }
@@ -61,14 +63,26 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
 
             //Assert
             result.ClaimId.ShouldBe("201670005692");
+            result.UpdatedUser.ShouldBe(_updatedUser);
+            result.UpdatedDate.ShouldBe(_updatedDate);
             result.Features.Count.ShouldBe(1);
             result.Features[0].FeatureId.ShouldBe("0004110");
+            result.Features[0].UpdatedUser.ShouldBe(_updatedUser);
+            result.Features[0].UpdatedDate.ShouldBe(_updatedDate);
             result.PaymentTransactions.Count.ShouldBe(1);
             result.PaymentTransactions[0].PaymentTransactionId.ShouldBe(1);
+            result.PaymentTransactions[0].UpdatedUser.ShouldBe(_updatedUser);
+            result.PaymentTransactions[0].UpdatedDate.ShouldBe(_updatedDate);
             result.ReserveTransactions.Count.ShouldBe(3);
             result.ReserveTransactions[0].ReserveTransactionId.ShouldBe(1);
+            result.ReserveTransactions[0].UpdatedUser.ShouldBe(_updatedUser);
+            result.ReserveTransactions[0].UpdatedDate.ShouldBe(_updatedDate);
+            result.ReserveTransactions[1].UpdatedUser.ShouldBe(_updatedUser);
             result.ReserveTransactions[1].ReserveTransactionId.ShouldBe(2);
+            result.ReserveTransactions[1].UpdatedDate.ShouldBe(_updatedDate);
+            result.ReserveTransactions[2].UpdatedUser.ShouldBe(_updatedUser);
             result.ReserveTransactions[2].ReserveTransactionId.ShouldBe(3);
+            result.ReserveTransactions[2].UpdatedDate.ShouldBe(_updatedDate);
         }
 
         [Test]
@@ -83,6 +97,8 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             //Assert
             result.Count.ShouldBe(1);
             result[0].ClaimId.ShouldBe("201670005692");
+            result[0].UpdatedUser.ShouldBe(_updatedUser);
+            result[0].UpdatedDate.ShouldBe(_updatedDate);
         }
 
         private static Claim StubClaim(string updatedUser, DateTime updatedDate)
