@@ -22,7 +22,7 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             _claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContextFactory);
         }
 
-        [Test, Explicit]
+        [Test]
         public void SaveClaim_Saves_Claim()
         {
             //Arrange
@@ -30,13 +30,10 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             var claim = StubClaim("TestUser", updatedDate);
 
             //Act
-            var result = _claimsRepository.SaveClaim(claim);
-
-            //Assert
-            result.ShouldBeTrue();
+            _claimsRepository.SaveClaim(claim);
         }
 
-        [Test, Explicit]
+        [Test]
         public void GetClaim_Gets_Claim()
         {
             //Act
@@ -54,7 +51,7 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             result.ReserveTransactions[2].ReserveTransactionId.ShouldBe(3);
         }
 
-        [Test, Explicit]
+        [Test]
         public void GetClaims_Gets_Claims()
         {
             //Act
