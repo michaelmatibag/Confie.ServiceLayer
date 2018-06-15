@@ -12,30 +12,50 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
     [TestFixture]
     public class ClaimsRepositoryTests
     {
+        private ClaimsContext _claimsContext;
         private IFactory<ClaimsContext> _claimsContextFactory;
         private Confie.WesternGeneral.ClaimsRepository.ClaimsRepository _claimsRepository;
+        private DateTime _updatedDate;
+        private Claim _claim;
 
         [SetUp]
         public void Setup()
         {
+            _claimsContext = new ClaimsContext();
             _claimsContextFactory = new ClaimsContextFactory();
             _claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContextFactory);
+            _updatedDate = DateTime.Now;
+            _claim = StubClaim("TestUser", _updatedDate);
+
+            _claimsContext.Database.Delete();
         }
 
         [Test]
         public void SaveClaim_Saves_Claim()
         {
-            //Arrange
-            var updatedDate = DateTime.Now;
-            var claim = StubClaim("TestUser", updatedDate);
-
             //Act
-            _claimsRepository.SaveClaim(claim);
+            var result = _claimsRepository.SaveClaim(_claim);
+
+            //Assert
+            result.ShouldBe(true);
+        }
+
+        [Test]
+        public void SaveClaims_Saves_Claims()
+        {
+            //Act
+            var result = _claimsRepository.SaveClaims(new List<Claim> {_claim});
+
+            //Assert
+            result.ShouldBe(true);
         }
 
         [Test]
         public void GetClaim_Gets_Claim()
         {
+            //Arrange
+            _claimsRepository.SaveClaim(_claim);
+
             //Act
             var result = _claimsRepository.GetClaim("201670005692");
 
@@ -54,6 +74,9 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
         [Test]
         public void GetClaims_Gets_Claims()
         {
+            //Arrange
+            _claimsRepository.SaveClaim(_claim);
+
             //Act
             var result = _claimsRepository.GetClaims();
 
