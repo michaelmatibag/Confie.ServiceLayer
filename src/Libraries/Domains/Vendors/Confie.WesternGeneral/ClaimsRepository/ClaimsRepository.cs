@@ -1,193 +1,168 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using Confie.Infrastructure.Factories;
 
 namespace Confie.WesternGeneral.ClaimsRepository
 {
     public class ClaimsRepository : IClaimsRepository
     {
-        private readonly ClaimsContext _claimsContext;
+        private readonly IFactory<ClaimsContext> _claimsContextFactory;
 
-        public ClaimsRepository(ClaimsContext claimsContext)
+        public ClaimsRepository(IFactory<ClaimsContext> claimsContextFactory)
         {
-            _claimsContext = claimsContext;
+            _claimsContextFactory = claimsContextFactory;
         }
 
         public bool SaveClaim(Claim claim)
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
-                {
-                    _claimsContext.Claims.Add(claim);
-                    _claimsContext.SaveChanges();
-                }
+                if (claimsContext.Claims.Any(x => x.ClaimId == claim.ClaimId)) return false;
 
-                return true;
-            }
-            catch
-            {
-                //TODO:  Add logging.
+                claimsContext.Claims.Add(claim);
 
-                return false;
+                return claimsContext.SaveChanges() > 0;
             }
         }
 
         public bool SaveClaims(IList<Claim> claims)
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
+                foreach (var claim in claims)
                 {
-                    foreach (var claim in claims)
-                    {
-                        _claimsContext.Claims.Add(claim);
-                    }
+                    if (claimsContext.Claims.Any(x => x.ClaimId == claim.ClaimId)) continue;
 
-                    _claimsContext.SaveChanges();
+                    claimsContext.Claims.Add(claim);
                 }
 
-                return true;
-            }
-            catch
-            {
-                //TODO:  Add logging.
-
-                return false;
+                return claimsContext.SaveChanges() > 0;
             }
         }
 
         public Claim GetClaim(string claimId)
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
-                {
-                    var claim = _claimsContext.Claims.FirstOrDefault(x => x.ClaimId == claimId);
-
-                    if (claim == null) return null;
-
-                    claim.Features = GetFeatures(claimId);
-
-                    return claim;
-                }
-            }
-            catch
-            {
-                //TODO:  Add logging.
-
-                return null;
+                return claimsContext.Claims
+                    .Include(x => x.Features)
+                    .Include(x => x.PaymentTransactions)
+                    .Include(x => x.ReserveTransactions)
+                    .FirstOrDefault(x => x.ClaimId == claimId);
             }
         }
 
         public IList<Claim> GetClaims()
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
-                {
-                    return _claimsContext.Claims.ToList();
-                }
-            }
-            catch
-            {
-                //TODO:  Add logging.
-
-                return null;
+                return claimsContext.Claims
+                    .ToList();
             }
         }
 
         public bool SaveFeature(Feature feature)
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
-                {
-                    _claimsContext.Features.Add(feature);
-                    _claimsContext.SaveChanges();
-                }
+                claimsContext.Features.Add(feature);
 
-                return true;
-            }
-            catch
-            {
-                //TODO:  Add logging.
-
-                return false;
+                return claimsContext.SaveChanges() > 0;
             }
         }
 
         public bool SaveFeatures(IList<Feature> features)
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
+                foreach (var feature in features)
                 {
-                    foreach (var feature in features)
-                    {
-                        _claimsContext.Features.Add(feature);
-                    }
-                    
-                    _claimsContext.SaveChanges();
+                    claimsContext.Features.Add(feature);
                 }
 
-                return true;
-            }
-            catch
-            {
-                //TODO:  Add logging.
-
-                return false;
+                return claimsContext.SaveChanges() > 0;
             }
         }
 
         public Feature GetFeature(string featureId)
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
-                {
-                    return _claimsContext.Features.FirstOrDefault(x => x.FeatureId == featureId);
-                }
-            }
-            catch
-            {
-                //TODO:  Add logging.
-
-                return null;
+                return claimsContext.Features
+                    .Include(x => x.PaymentTransactions)
+                    .Include(x => x.ReserveTransactions)
+                    .FirstOrDefault(x => x.FeatureId == featureId);
             }
         }
 
         public IList<Feature> GetFeatures()
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
-                {
-                    return _claimsContext.Features.ToList();
-                }
-            }
-            catch
-            {
-                //TODO:  Add logging.
-
-                return null;
+                return claimsContext.Features
+                    .ToList();
             }
         }
 
         public IList<Feature> GetFeatures(string claimId)
         {
-            try
+            using (var claimsContext = _claimsContextFactory.Create())
             {
-                using (_claimsContext)
-                {
-                    return _claimsContext.Features.Where(x => x.ClaimId == claimId).ToList();
-                }
+                return claimsContext.Features
+                    .Where(x => x.ClaimId == claimId)
+                    .ToList();
             }
-            catch
-            {
-                //TODO:  Add logging.
+        }
 
-                return null;
+        public bool SavePaymentTransaction(PaymentTransaction paymentTransaction)
+        {
+            using (var claimsContext = _claimsContextFactory.Create())
+            {
+                claimsContext.PaymentTransactions.Add(paymentTransaction);
+
+                return claimsContext.SaveChanges() > 0;
+            }
+        }
+
+        public bool SavePaymentTransactions(IList<PaymentTransaction> paymentTransactions)
+        {
+            using (var claimsContext = _claimsContextFactory.Create())
+            {
+                foreach (var paymentTransaction in paymentTransactions)
+                {
+                    claimsContext.PaymentTransactions.Add(paymentTransaction);
+                }
+
+                return claimsContext.SaveChanges() > 0;
+            }
+        }
+
+        public PaymentTransaction GetPaymentTransaction(int paymentTransactionId)
+        {
+            using (var claimsContext = _claimsContextFactory.Create())
+            {
+                return claimsContext.PaymentTransactions
+                    .FirstOrDefault(x => x.PaymentTransactionId == paymentTransactionId);
+            }
+        }
+
+        public IList<PaymentTransaction> GetPaymentTransactions(string featureId)
+        {
+            using (var claimsContext = _claimsContextFactory.Create())
+            {
+                return claimsContext.PaymentTransactions
+                    .Where(x => x.FeatureId == featureId)
+                    .ToList();
+            }
+        }
+
+        public IList<PaymentTransaction> GetPaymentTransactions()
+        {
+            using (var claimsContext = _claimsContextFactory.Create())
+            {
+                return claimsContext.PaymentTransactions
+                    .ToList();
             }
         }
     }

@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Claim.cs" />
     <Compile Include="ClaimsRepository\ClaimsContext.cs" />
+    <Compile Include="ClaimsRepository\ClaimsContextFactory.cs" />
     <Compile Include="ClaimsRepository\ClaimsRepository.cs" />
     <Compile Include="ClaimsRepository\IClaimsRepository.cs" />
     <Compile Include="Feature.cs" />
@@ -63,6 +64,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Infrastructure\Confie.Infrastructure\Confie.Infrastructure.csproj">
+      <Project>{495B42A0-F18F-4DE2-83BC-646A9154D2D8}</Project>
+      <Name>Confie.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
