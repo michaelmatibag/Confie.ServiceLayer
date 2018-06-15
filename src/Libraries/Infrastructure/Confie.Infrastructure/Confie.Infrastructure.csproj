@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="Factories\IFactory.cs" />
     <Compile Include="FileHandling\FixedFileHandling.cs" />
     <Compile Include="FileHandling\IFileHandling.cs" />
     <Compile Include="JsonHandling\Converter.cs" />
