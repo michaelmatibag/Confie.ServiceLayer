@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Confie.WesternGeneral.ClaimsRepository
@@ -62,13 +63,11 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    var claim = _claimsContext.Claims.FirstOrDefault(x => x.ClaimId == claimId);
-
-                    if (claim == null) return null;
-
-                    claim.Features = GetFeatures(claimId);
-
-                    return claim;
+                    return _claimsContext.Claims
+                        .Include(x => x.Features)
+                        .Include(x => x.PaymentTransactions)
+                        .Include(x => x.ReserveTransactions)
+                        .FirstOrDefault(x => x.ClaimId == claimId);
                 }
             }
             catch
@@ -85,7 +84,8 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.Claims.ToList();
+                    return _claimsContext.Claims
+                        .ToList();
                 }
             }
             catch
@@ -146,7 +146,10 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.Features.FirstOrDefault(x => x.FeatureId == featureId);
+                    return _claimsContext.Features
+                        .Include(x => x.PaymentTransactions)
+                        .Include(x => x.ReserveTransactions)
+                        .FirstOrDefault(x => x.FeatureId == featureId);
                 }
             }
             catch
@@ -163,7 +166,8 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.Features.ToList();
+                    return _claimsContext.Features
+                        .ToList();
                 }
             }
             catch
@@ -180,7 +184,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.Features.Where(x => x.ClaimId == claimId).ToList();
+                    return _claimsContext.Features
+                        .Where(x => x.ClaimId == claimId)
+                        .ToList();
                 }
             }
             catch
@@ -241,7 +247,8 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.PaymentTransactions.FirstOrDefault(x => x.PaymentTransactionId == paymentTransactionId);
+                    return _claimsContext.PaymentTransactions
+                        .FirstOrDefault(x => x.PaymentTransactionId == paymentTransactionId);
                 }
             }
             catch
@@ -258,7 +265,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.PaymentTransactions.Where(x => x.FeatureId == featureId).ToList();
+                    return _claimsContext.PaymentTransactions
+                        .Where(x => x.FeatureId == featureId)
+                        .ToList();
                 }
             }
             catch
@@ -275,7 +284,8 @@ namespace Confie.WesternGeneral.ClaimsRepository
             {
                 using (_claimsContext)
                 {
-                    return _claimsContext.PaymentTransactions.ToList();
+                    return _claimsContext.PaymentTransactions
+                        .ToList();
                 }
             }
             catch

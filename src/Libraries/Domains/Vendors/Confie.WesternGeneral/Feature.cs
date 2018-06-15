@@ -75,7 +75,7 @@ namespace Confie.WesternGeneral
         public virtual Claim Claim { get; set; }
 
         [FieldHidden]
-        public virtual List<PaymentTransaction> PaymentTransactions { get; set; }
+        public virtual IList<PaymentTransaction> PaymentTransactions { get; set; }
 
         [FieldHidden]
         public virtual List<ReserveTransaction> ReserveTransactions { get; set; }

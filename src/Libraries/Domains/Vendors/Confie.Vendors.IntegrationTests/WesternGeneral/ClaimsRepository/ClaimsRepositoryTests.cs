@@ -36,6 +36,24 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
         }
 
         [Test, Explicit]
+        public void GetClaim_Gets_Claim()
+        {
+            //Act
+            var result = _claimsRepository.GetClaim("201670005692");
+
+            //Assert
+            result.ClaimId.ShouldBe("201670005692");
+            result.Features.Count.ShouldBe(1);
+            result.Features[0].FeatureId.ShouldBe("0004110");
+            result.PaymentTransactions.Count.ShouldBe(1);
+            result.PaymentTransactions[0].PaymentTransactionId.ShouldBe(1);
+            result.ReserveTransactions.Count.ShouldBe(3);
+            result.ReserveTransactions[0].ReserveTransactionId.ShouldBe(1);
+            result.ReserveTransactions[1].ReserveTransactionId.ShouldBe(2);
+            result.ReserveTransactions[2].ReserveTransactionId.ShouldBe(3);
+        }
+
+        [Test, Explicit]
         public void GetClaims_Gets_Claims()
         {
             //Act
@@ -44,8 +62,6 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             //Assert
             result.Count.ShouldBe(1);
             result[0].ClaimId.ShouldBe("201670005692");
-            result[0].Features.Count.ShouldBe(1);
-            result[0].Features[0].FeatureId.ShouldBe("0004110");
         }
 
         private static Claim StubClaim(string updatedUser, DateTime updatedDate)
