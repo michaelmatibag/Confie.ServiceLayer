@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Claim.cs" />
+    <Compile Include="ClaimBase.cs" />
     <Compile Include="ClaimsRepository\ClaimsContext.cs" />
     <Compile Include="ClaimsRepository\ClaimsContextFactory.cs" />
     <Compile Include="ClaimsRepository\ClaimsRepository.cs" />
