@@ -5,7 +5,7 @@ using FileHelpers.Events;
 namespace Confie.WesternGeneral
 {
     [FixedLengthRecord]
-    public class ReserveTransaction : INotifyRead
+    public class ReserveTransaction : ClaimBase, INotifyRead
     {
         [FieldFixedLength(50)]
         [FieldTrim(TrimMode.Right)]
@@ -34,12 +34,6 @@ namespace Confie.WesternGeneral
 
         [FieldHidden]
         public int ReserveTransactionId { get; set; }
-
-        [FieldHidden]
-        public string UpdatedUser { get; set; }
-
-        [FieldHidden]
-        public DateTime UpdatedDate { get; set; }
 
         [FieldHidden]
         public virtual Claim Claim { get; set; }

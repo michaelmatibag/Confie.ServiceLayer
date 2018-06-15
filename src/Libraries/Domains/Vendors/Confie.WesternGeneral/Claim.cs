@@ -6,7 +6,7 @@ using FileHelpers.Events;
 namespace Confie.WesternGeneral
 {
     [FixedLengthRecord]
-    public class Claim : INotifyRead
+    public class Claim : ClaimBase, INotifyRead
     {
         [FieldFixedLength(50)]
         [FieldTrim(TrimMode.Right)]
@@ -114,12 +114,6 @@ namespace Confie.WesternGeneral
 
         [FieldHidden]
         public SubmissionStatus SubmissionStatus { get; set; }
-
-        [FieldHidden]
-        public string UpdatedUser { get; set; }
-
-        [FieldHidden]
-        public DateTime UpdatedDate { get; set; }
 
         [FieldHidden]
         public virtual IList<Feature> Features { get; set; }
