@@ -1,26 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Confie.Infrastructure.Factories;
 
 namespace Confie.WesternGeneral.ClaimsRepository
 {
     public class ClaimsRepository : IClaimsRepository
     {
-        private readonly ClaimsContext _claimsContext;
+        private readonly IFactory<ClaimsContext> _claimsContextFactory;
 
-        public ClaimsRepository(ClaimsContext claimsContext)
+        public ClaimsRepository(IFactory<ClaimsContext> claimsContextFactory)
         {
-            _claimsContext = claimsContext;
+            _claimsContextFactory = claimsContextFactory;
         }
 
         public bool SaveClaim(Claim claim)
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    _claimsContext.Claims.Add(claim);
-                    _claimsContext.SaveChanges();
+                    claimsContext.Claims.Add(claim);
+                    claimsContext.SaveChanges();
                 }
 
                 return true;
@@ -37,14 +38,14 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
                     foreach (var claim in claims)
                     {
-                        _claimsContext.Claims.Add(claim);
+                        claimsContext.Claims.Add(claim);
                     }
 
-                    _claimsContext.SaveChanges();
+                    claimsContext.SaveChanges();
                 }
 
                 return true;
@@ -61,9 +62,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.Claims
+                    return claimsContext.Claims
                         .Include(x => x.Features)
                         .Include(x => x.PaymentTransactions)
                         .Include(x => x.ReserveTransactions)
@@ -82,9 +83,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.Claims
+                    return claimsContext.Claims
                         .ToList();
                 }
             }
@@ -100,10 +101,10 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    _claimsContext.Features.Add(feature);
-                    _claimsContext.SaveChanges();
+                    claimsContext.Features.Add(feature);
+                    claimsContext.SaveChanges();
                 }
 
                 return true;
@@ -120,14 +121,14 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
                     foreach (var feature in features)
                     {
-                        _claimsContext.Features.Add(feature);
+                        claimsContext.Features.Add(feature);
                     }
                     
-                    _claimsContext.SaveChanges();
+                    claimsContext.SaveChanges();
                 }
 
                 return true;
@@ -144,9 +145,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.Features
+                    return claimsContext.Features
                         .Include(x => x.PaymentTransactions)
                         .Include(x => x.ReserveTransactions)
                         .FirstOrDefault(x => x.FeatureId == featureId);
@@ -164,9 +165,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.Features
+                    return claimsContext.Features
                         .ToList();
                 }
             }
@@ -182,9 +183,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.Features
+                    return claimsContext.Features
                         .Where(x => x.ClaimId == claimId)
                         .ToList();
                 }
@@ -201,10 +202,10 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    _claimsContext.PaymentTransactions.Add(paymentTransaction);
-                    _claimsContext.SaveChanges();
+                    claimsContext.PaymentTransactions.Add(paymentTransaction);
+                    claimsContext.SaveChanges();
                 }
 
                 return true;
@@ -221,14 +222,14 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
                     foreach (var paymentTransaction in paymentTransactions)
                     {
-                        _claimsContext.PaymentTransactions.Add(paymentTransaction);
+                        claimsContext.PaymentTransactions.Add(paymentTransaction);
                     }
 
-                    _claimsContext.SaveChanges();
+                    claimsContext.SaveChanges();
                 }
 
                 return true;
@@ -245,9 +246,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.PaymentTransactions
+                    return claimsContext.PaymentTransactions
                         .FirstOrDefault(x => x.PaymentTransactionId == paymentTransactionId);
                 }
             }
@@ -263,9 +264,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.PaymentTransactions
+                    return claimsContext.PaymentTransactions
                         .Where(x => x.FeatureId == featureId)
                         .ToList();
                 }
@@ -282,9 +283,9 @@ namespace Confie.WesternGeneral.ClaimsRepository
         {
             try
             {
-                using (_claimsContext)
+                using (var claimsContext = _claimsContextFactory.Create())
                 {
-                    return _claimsContext.PaymentTransactions
+                    return claimsContext.PaymentTransactions
                         .ToList();
                 }
             }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Confie.Infrastructure.Factories;
 using Confie.WesternGeneral;
 using Confie.WesternGeneral.ClaimsRepository;
 using NUnit.Framework;
@@ -13,23 +14,27 @@ namespace Confie.Vendors.UnitTests.WesternGeneral.ClaimsRepository
     [TestFixture]
     public class ClaimsRepositoryTests
     {
-        private ClaimsContext _claimsContext;
+        private IFactory<ClaimsContext> _claimsContextFactory;
+
         private IDbSet<Claim> _dbSetClaim;
+        private ClaimsContext _claimsContext;
 
         [SetUp]
         public void Setup()
         {
-            _claimsContext = MockRepository.GenerateMock<ClaimsContext>();
+            _claimsContextFactory = MockRepository.GenerateMock<IFactory<ClaimsContext>>();
             _dbSetClaim = MockRepository.GenerateMock<IDbSet<Claim>, IQueryable>();
+            _claimsContext = MockRepository.GenerateMock<ClaimsContext>();
         }
 
         [Test]
         public void SaveClaim_Saves_Claim()
         {
             //Arrange
+            _claimsContextFactory.Stub(x => x.Create()).Return(_claimsContext);
             _claimsContext.Stub(x => x.Claims).Return(_dbSetClaim);
 
-            var claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContext);
+            var claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContextFactory);
             var claim = StubClaim();
 
             //Act
@@ -38,6 +43,7 @@ namespace Confie.Vendors.UnitTests.WesternGeneral.ClaimsRepository
             //Assert
             result.ShouldBeTrue();
             _dbSetClaim.AssertWasCalled(x => x.Add(Arg<Claim>.Matches(y => y.ClaimId.Equals(claim.ClaimId))));
+            _claimsContextFactory.AssertWasCalled(x => x.Create());
             _claimsContext.AssertWasCalled(x => x.SaveChanges());
         }
 
@@ -47,13 +53,14 @@ namespace Confie.Vendors.UnitTests.WesternGeneral.ClaimsRepository
             //Arrange
             var claims = StubClaims();
 
+            _claimsContextFactory.Stub(x => x.Create()).Return(_claimsContext);
             _dbSetClaim.Stub(x => x.Provider).Return(claims.Provider);
             _dbSetClaim.Stub(x => x.Expression).Return(claims.Expression);
             _dbSetClaim.Stub(x => x.ElementType).Return(claims.ElementType);
             _dbSetClaim.Stub(x => x.GetEnumerator()).Return(claims.GetEnumerator());
             _claimsContext.Stub(x => x.Claims).Return(_dbSetClaim);
 
-            var claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContext);
+            var claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContextFactory);
 
             //Act
             var result = claimsRepository.GetClaims();
@@ -62,6 +69,7 @@ namespace Confie.Vendors.UnitTests.WesternGeneral.ClaimsRepository
             result.Count.ShouldBe(2);
             result[0].ClaimId.ShouldBe("TESTCLAIM1");
             result[1].ClaimId.ShouldBe("TESTCLAIM2");
+            _claimsContextFactory.AssertWasCalled(x => x.Create());
             _claimsContext.AssertWasCalled(x => x.Claims);
         }
 

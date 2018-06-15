@@ -1,4 +1,5 @@
-﻿using Confie.WesternGeneral;
+﻿using Confie.Infrastructure.Factories;
+using Confie.WesternGeneral;
 using Confie.WesternGeneral.ClaimsRepository;
 using NUnit.Framework;
 using Shouldly;
@@ -11,14 +12,14 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
     [TestFixture]
     public class ClaimsRepositoryTests
     {
-        private ClaimsContext _claimsContext;
+        private IFactory<ClaimsContext> _claimsContextFactory;
         private Confie.WesternGeneral.ClaimsRepository.ClaimsRepository _claimsRepository;
 
         [SetUp]
         public void Setup()
         {
-            _claimsContext = new ClaimsContext();
-            _claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContext);
+            _claimsContextFactory = new ClaimsContextFactory();
+            _claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContextFactory);
         }
 
         [Test, Explicit]
