@@ -58,6 +58,7 @@
     <Compile Include="Factories\IFactory.cs" />
     <Compile Include="FileHandling\FixedFileHandling.cs" />
     <Compile Include="FileHandling\IFileHandling.cs" />
+    <Compile Include="FileHandling\MoneyConverter.cs" />
     <Compile Include="JsonHandling\Converter.cs" />
     <Compile Include="JsonHandling\IConverter.cs" />
     <Compile Include="JsonHandling\IJsonHandling.cs" />
