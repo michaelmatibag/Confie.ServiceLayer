@@ -1,4 +1,5 @@
 ﻿using System;
+using Confie.Infrastructure.FileHandling;
 using FileHelpers;
 using FileHelpers.Events;
 
@@ -20,7 +21,7 @@ namespace Confie.WesternGeneral
         public DateTime PaymentDate { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal PaymentAmount { get; set; }
 
         [FieldFixedLength(30)]
