@@ -1,4 +1,5 @@
 ﻿using System;
+using Confie.Infrastructure.FileHandling;
 using FileHelpers;
 using FileHelpers.Events;
 
@@ -20,11 +21,11 @@ namespace Confie.WesternGeneral
         public DateTime ReserveChangeDate { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal ReserveBefore { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal ReserveAfter { get; set; }
 
         [FieldFixedLength(20)]

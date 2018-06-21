@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Confie.Infrastructure.FileHandling;
 using FileHelpers;
 using FileHelpers.Events;
 
@@ -42,27 +43,27 @@ namespace Confie.WesternGeneral
         public bool ClosedWithoutPayment { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal Payments { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal Recoveries { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal Expenses { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal ReservesAtBeginning { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal ReservesAtEnd { get; set; }
 
         [FieldFixedLength(17)]
-        [FieldConverter(ConverterKind.Decimal)]
+        [FieldConverter(typeof(MoneyConverter))]
         public decimal TotalIncurredLoss { get; set; }
 
         [FieldHidden]
