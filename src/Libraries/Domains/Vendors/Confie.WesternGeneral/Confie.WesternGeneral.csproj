@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=1.1.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\AutoMapper.1.1.2\lib\net35\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -57,6 +60,7 @@
     <Compile Include="ClaimsRepository\ClaimsRepository.cs" />
     <Compile Include="ClaimsRepository\IClaimsRepository.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="Mapper\WesternGeneralMapperProfile.cs" />
     <Compile Include="PaymentTransaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReserveTransaction.cs" />
@@ -70,6 +74,10 @@
     <ProjectReference Include="..\..\..\Infrastructure\Confie.Infrastructure\Confie.Infrastructure.csproj">
       <Project>{495B42A0-F18F-4DE2-83BC-646A9154D2D8}</Project>
       <Name>Confie.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Confie.PolicyOne\Confie.PolicyOne.csproj">
+      <Project>{af63a59d-8492-4c54-a677-7866b42aab41}</Project>
+      <Name>Confie.PolicyOne</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
