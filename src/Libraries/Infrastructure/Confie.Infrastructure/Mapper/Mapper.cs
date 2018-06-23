@@ -24,5 +24,10 @@ namespace Confie.Infrastructure.Mapper
         {
             return _mappingEngine.Map<TSource, TDestination>(source);
         }
+
+        public void AssertConfigurationIsValid()
+        {
+            _configuration.AssertConfigurationIsValid();
+        }
     }
 }
