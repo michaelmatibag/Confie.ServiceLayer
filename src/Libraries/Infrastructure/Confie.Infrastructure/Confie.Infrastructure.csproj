@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=1.1.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\AutoMapper.1.1.2\lib\net35\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -45,6 +48,10 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="Mapper\IMapper.cs" />
     <Compile Include="Factories\IFactory.cs" />
     <Compile Include="FileHandling\FixedFileHandling.cs" />
     <Compile Include="FileHandling\IFileHandling.cs" />
@@ -63,6 +71,8 @@
     <Compile Include="JsonHandling\IConverter.cs" />
     <Compile Include="JsonHandling\IJsonHandling.cs" />
     <Compile Include="JsonHandling\JsonHandling.cs" />
+    <Compile Include="Mapper\IMapperProfile.cs" />
+    <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
