@@ -6,3 +6,4 @@ install:
 script:
   - xbuild /p:Configuration=Debug Confie.ServiceLayer.sln
   - mono ./testrunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./src/Libraries/Infrastructure/Confie.Infrastructure.UnitTests/bin/Debug/Confie.Infrastructure.UnitTests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./src/Libraries/Domains/Vendors/Confie.Vendors.UnitTests/bin/Debug/Confie.Vendors.UnitTests.dll
