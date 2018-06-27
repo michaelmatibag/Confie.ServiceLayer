@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AutoMapper;
 using Confie.Infrastructure.Mapper;
 using Confie.PolicyOne;
@@ -51,67 +52,74 @@ namespace Confie.WesternGeneral.Mapper
                     Number = x.PolicyNumber,
                     ExpirationDate = x.PolicyExpirationDate,
                     EffectiveDate = x.PolicyEffectiveDate
+                }))
+                .ForMember(d => d.Features, s => s.MapFrom(x =>
+                {
+                    return x.Features.Select(feature => new PolicyOne.Feature
+                        {
+                            Number = feature.FeatureId,
+                            ClaimFeatureId = feature.FeatureId,
+                            ClosedDate = new DateTimeOffset(feature.CloseDate),
+                            Coverage = feature.CoverageCode,
+                            CoverageSubCode = feature.CoverageSubCode,
+                            OpenDate = new DateTimeOffset(feature.OpenDate),
+                            Status = feature.FeatureStatus,
+                            PercentAtFault = x.PercentAtFault,
+                            LossDescription = x.ClaimDescription,
+                            Claimant = new Claimant
+                            {
+                                Vehicle = new Vehicle
+                                {
+                                    Year = x.InsuredYear,
+                                    LicenseNumber = x.DriverLicenseId,
+                                    Model = x.InsuredModel,
+                                    Vin = x.InsuredVin,
+                                    Make = x.InsuredMake,
+                                    LicenseState = x.DriverLicenseState
+                                },
+                                State = x.DriverLicenseState,
+                                BusinessName = string.Empty,
+                                FirstName = x.DriverFirstName,
+                                City = string.Empty,
+                                LastName = x.DriverLastName
+                            },
+                            InsuredVehicle = new Vehicle
+                            {
+                                Year = x.InsuredYear,
+                                LicenseNumber = x.DriverLicenseId,
+                                Model = x.InsuredModel,
+                                Vin = x.InsuredVin,
+                                Make = x.InsuredMake,
+                                LicenseState = x.DriverLicenseState
+                            },
+                            Payments = x.PaymentTransactions.Select(paymentTransaction => new Payment
+                                {
+                                    City = paymentTransaction.PaymentCity,
+                                    Address = paymentTransaction.PaymentAddress,
+                                    Amount = Convert.ToInt64(paymentTransaction.PaymentAmount),
+                                    BusinessName = string.Empty,
+                                    CheckNumber = paymentTransaction.CheckNumber,
+                                    Date = new DateTimeOffset(paymentTransaction.PaymentDate),
+                                    FirstName = x.DriverFirstName,
+                                    LastName = x.DriverLastName,
+                                    PaymentType = paymentTransaction.PaymentType,
+                                    RecoveryType = paymentTransaction.RecoveryType,
+                                    State = paymentTransaction.PaymentState,
+                                    Status = paymentTransaction.PaymentStatus,
+                                    Zip = paymentTransaction.PaymentZip,
+                                    PaymentId = paymentTransaction.PaymentTransactionId.ToString()
+                                })
+                                .ToList(),
+                            Reserves = x.ReserveTransactions.Select(reserveTransaction => new Reserve
+                                {
+                                    Amount = Convert.ToInt64(reserveTransaction.ReserveAfter),
+                                    ChangeDate = new DateTimeOffset(reserveTransaction.ReserveChangeDate),
+                                    ClaimReserveId = reserveTransaction.ReserveTransactionId.ToString()
+                                })
+                                .ToList()
+                        })
+                        .ToList();
                 }));
-
-            profileExpression.CreateMap<Feature, PolicyOne.Feature>()
-                .ForMember(d => d.Number, s => s.MapFrom(x => x.FeatureId))
-                .ForMember(d => d.ClaimFeatureId, s => s.MapFrom(x => x.FeatureId))
-                .ForMember(d => d.ClosedDate, s => s.MapFrom(x => new DateTimeOffset(x.CloseDate)))
-                .ForMember(d => d.Coverage, s => s.MapFrom(x => x.CoverageCode))
-                .ForMember(d => d.CoverageSubCode, s => s.MapFrom(x => x.CoverageSubCode))
-                .ForMember(d => d.OpenDate, s => s.MapFrom(x => new DateTimeOffset(x.OpenDate)))
-                .ForMember(d => d.Status, s => s.MapFrom(x => x.FeatureStatus))
-                .ForMember(d => d.PercentAtFault, s => s.MapFrom(x => x.Claim.PercentAtFault))
-                .ForMember(d => d.LossDescription, s => s.MapFrom(x => x.Claim.ClaimDescription))
-                .ForMember(d => d.Claimant, s => s.MapFrom(x => new Claimant
-                {
-                    Vehicle = new Vehicle
-                    {
-                        Year = x.Claim.InsuredYear,
-                        LicenseNumber = x.Claim.DriverLicenseId,
-                        Model = x.Claim.InsuredModel,
-                        Vin = x.Claim.InsuredVin,
-                        Make = x.Claim.InsuredMake,
-                        LicenseState = x.Claim.DriverLicenseState
-                    },
-                    State = x.Claim.DriverLicenseState,
-                    BusinessName = string.Empty,
-                    FirstName = x.Claim.DriverFirstName,
-                    City = string.Empty,
-                    LastName = x.Claim.DriverLastName
-                }))
-                .ForMember(d => d.InsuredVehicle, s => s.MapFrom(x => new Vehicle
-                {
-                    Year = x.Claim.InsuredYear,
-                    LicenseNumber = x.Claim.DriverLicenseId,
-                    Model = x.Claim.InsuredModel,
-                    Vin = x.Claim.InsuredVin,
-                    Make = x.Claim.InsuredMake,
-                    LicenseState = x.Claim.DriverLicenseState
-                }))
-                .ForMember(d => d.Payments, s => s.MapFrom(x => x.PaymentTransactions))
-                .ForMember(d => d.Reserves, s => s.MapFrom(x => x.ReserveTransactions));
-
-            profileExpression.CreateMap<PaymentTransaction, Payment>()
-                .ForMember(d => d.City, s => s.MapFrom(x => x.PaymentCity))
-                .ForMember(d => d.Address, s => s.MapFrom(x => x.PaymentAddress))
-                .ForMember(d => d.Amount, s => s.MapFrom(x => x.PaymentAmount))
-                .ForMember(d => d.BusinessName, s => s.Ignore())
-                .ForMember(d => d.CheckNumber, s => s.MapFrom(x => x.CheckNumber))
-                .ForMember(d => d.Date, s => s.MapFrom(x => new DateTimeOffset(x.PaymentDate)))
-                .ForMember(d => d.FirstName, s => s.MapFrom(x => x.Claim.DriverFirstName))
-                .ForMember(d => d.LastName, s => s.MapFrom(x => x.Claim.DriverLastName))
-                .ForMember(d => d.PaymentType, s => s.MapFrom(x => x.PaymentType))
-                .ForMember(d => d.RecoveryType, s => s.MapFrom(x => x.RecoveryType))
-                .ForMember(d => d.State, s => s.MapFrom(x => x.PaymentState))
-                .ForMember(d => d.Status, s => s.MapFrom(x => x.PaymentStatus))
-                .ForMember(d => d.Zip, s => s.MapFrom(x => x.PaymentZip))
-                .ForMember(d => d.PaymentId, s => s.MapFrom(x => x.PaymentTransactionId));
-
-            profileExpression.CreateMap<ReserveTransaction, Reserve>()
-                .ForMember(d => d.Amount, s => s.MapFrom(x => x.ReserveAfter))
-                .ForMember(d => d.ChangeDate, s => s.MapFrom(x => new DateTimeOffset(x.ReserveChangeDate)))
-                .ForMember(d => d.ClaimReserveId, s => s.MapFrom(x => x.ReserveTransactionId));
         }
     }
 }
