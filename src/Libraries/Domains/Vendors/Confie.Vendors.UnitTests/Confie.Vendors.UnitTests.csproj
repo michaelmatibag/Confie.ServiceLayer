@@ -36,6 +36,9 @@
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Shouldly, Version=3.0.0.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Shouldly.3.0.0\lib\net451\Shouldly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +59,10 @@
     <ProjectReference Include="..\..\..\Infrastructure\Confie.Infrastructure\Confie.Infrastructure.csproj">
       <Project>{495b42a0-f18f-4de2-83bc-646a9154d2d8}</Project>
       <Name>Confie.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Confie.PolicyOne\Confie.PolicyOne.csproj">
+      <Project>{af63a59d-8492-4c54-a677-7866b42aab41}</Project>
+      <Name>Confie.PolicyOne</Name>
     </ProjectReference>
     <ProjectReference Include="..\Confie.WesternGeneral\Confie.WesternGeneral.csproj">
       <Project>{bc5e4ddb-34b5-4a96-ba8f-73edc9f2db1c}</Project>
