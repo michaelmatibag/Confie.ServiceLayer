@@ -2,6 +2,10 @@
 {
     public interface IRestExecutor
     {
-        string Execute(string request);
+        string Get(string resource);
+
+        T Get<T>(string resource) where T : new();
+
+        T Post<T>(T resource);
     }
 }
