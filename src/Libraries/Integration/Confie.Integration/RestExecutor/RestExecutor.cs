@@ -32,9 +32,16 @@ namespace Confie.Integration.RestExecutor
             return restResponse.Data;
         }
 
-        public T Post<T>(T request)
+        public T Post<T>(string resource, T request) where T : new()
         {
-            throw new NotImplementedException();
+            _restClient = new RestClient(_restExecutorConfiguration.RestApi);
+            var restRequest = new RestRequest(resource, Method.POST);
+
+            restRequest.AddJsonBody(request);
+
+            var restResponse = _restClient.Execute<T>(restRequest);
+
+            return restResponse.Data;
         }
     }
 }
