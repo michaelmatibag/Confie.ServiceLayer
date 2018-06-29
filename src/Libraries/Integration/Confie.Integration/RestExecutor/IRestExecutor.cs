@@ -6,6 +6,8 @@
 
         T Get<T>(string resource) where T : new();
 
-        T Post<T>(T resource);
+        string Post(string resource, string request);
+
+        T Post<T>(string resource, T request) where T : new();
     }
 }
