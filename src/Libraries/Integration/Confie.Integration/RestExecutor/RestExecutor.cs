@@ -32,6 +32,18 @@ namespace Confie.Integration.RestExecutor
             return restResponse.Data;
         }
 
+        public string Post(string resource, string request)
+        {
+            _restClient = new RestClient(_restExecutorConfiguration.RestApi);
+            var restRequest = new RestRequest(resource, Method.POST);
+
+            restRequest.AddParameter("application/json", request, ParameterType.RequestBody);
+
+            var restResponse = _restClient.Execute(restRequest);
+
+            return restResponse.Content;
+        }
+
         public T Post<T>(string resource, T request) where T : new()
         {
             _restClient = new RestClient(_restExecutorConfiguration.RestApi);
