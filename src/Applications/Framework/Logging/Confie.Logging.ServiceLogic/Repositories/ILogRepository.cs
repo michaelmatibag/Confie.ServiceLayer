@@ -6,7 +6,7 @@ namespace Confie.Logging.ServiceLogic.Repositories
     {
         void LogMessage(LogMessageLogEntry logMessage);
         void LogWebRequest(WebRequestLogEntry webRequest);
-        Executable GetWithAddExecutable(Executable execuatble);
+        Executable GetWithAddExecutable(Executable executable);
         RequestUrl GetWithAddRequestUrl(RequestUrl requestUrl);
         IpAddress GetWithAddIpAddress(IpAddress ipAddress);
     }
