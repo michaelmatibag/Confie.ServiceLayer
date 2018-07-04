@@ -41,9 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILoggingService.cs" />
+    <Compile Include="Services\LoggingService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\..\..\..\Libraries\Infrastructure\Confie.Infrastructure\Confie.Infrastructure.csproj">
+      <Project>{495b42a0-f18f-4de2-83bc-646a9154d2d8}</Project>
+      <Name>Confie.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
