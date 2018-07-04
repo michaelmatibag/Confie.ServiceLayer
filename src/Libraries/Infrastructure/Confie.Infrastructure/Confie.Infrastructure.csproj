@@ -61,7 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Configuration\DatabaseCatalog.cs" />
     <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="Configuration\ConfigurationRepository.cs" />
+    <Compile Include="Configuration\IConfigurationRepository.cs" />
+    <Compile Include="Exceptions\ApplicationConfigurationException.cs" />
     <Compile Include="Logging\Executable.cs" />
     <Compile Include="Logging\ExecutableType.cs" />
     <Compile Include="Logging\HttpVerb.cs" />
