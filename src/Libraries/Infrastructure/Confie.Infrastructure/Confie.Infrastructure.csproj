@@ -61,7 +61,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Configuration\DatabaseCatalog.cs" />
     <Compile Include="Configuration\IConfiguration.cs" />
+    <Compile Include="Configuration\ConfigurationRepository.cs" />
+    <Compile Include="Configuration\IConfigurationRepository.cs" />
+    <Compile Include="Exceptions\ApplicationConfigurationException.cs" />
+    <Compile Include="Logging\Executable.cs" />
+    <Compile Include="Logging\ExecutableType.cs" />
+    <Compile Include="Logging\HttpVerb.cs" />
+    <Compile Include="Logging\IpAddress.cs" />
+    <Compile Include="Logging\Level.cs" />
+    <Compile Include="Logging\LogEntry.cs" />
+    <Compile Include="Logging\LogMessageLogEntry.cs" />
+    <Compile Include="Logging\WebRequestLogRequest.cs" />
+    <Compile Include="Logging\LogMessageRequest.cs" />
+    <Compile Include="Logging\LogMessageResponse.cs" />
+    <Compile Include="Logging\LogType.cs" />
+    <Compile Include="Logging\RequestUrl.cs" />
+    <Compile Include="Logging\WebRequestLogEntry.cs" />
+    <Compile Include="Logging\WebRequestLogResponse.cs" />
     <Compile Include="Mapper\IMapper.cs" />
     <Compile Include="Factories\IFactory.cs" />
     <Compile Include="FileHandling\FixedFileHandling.cs" />
@@ -74,6 +92,8 @@
     <Compile Include="Mapper\IMapperProfile.cs" />
     <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\WebRequest.cs" />
+    <Compile Include="Web\WebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
