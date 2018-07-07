@@ -1,11 +1,13 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using Confie.Infrastructure.Configuration;
+using Confie.Infrastructure.DependencyResolution;
 using Confie.Infrastructure.Logging;
 using Dapper;
 
 namespace Confie.Logging.ServiceLogic.Repositories
 {
+    [Injectable]
     public class LogRepository : ILogRepository
     {
         private readonly IConfigurationRepository _configurationRepository;

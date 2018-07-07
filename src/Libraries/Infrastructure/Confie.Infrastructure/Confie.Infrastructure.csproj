@@ -65,6 +65,7 @@
     <Compile Include="Configuration\IConfiguration.cs" />
     <Compile Include="Configuration\ConfigurationRepository.cs" />
     <Compile Include="Configuration\IConfigurationRepository.cs" />
+    <Compile Include="DependencyResolution\InjectableAttribute.cs" />
     <Compile Include="Exceptions\ApplicationConfigurationException.cs" />
     <Compile Include="Logging\Executable.cs" />
     <Compile Include="Logging\ExecutableType.cs" />

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Configuration;
+using Confie.Infrastructure.DependencyResolution;
 using Confie.Infrastructure.Exceptions;
 
 namespace Confie.Infrastructure.Configuration
 {
+    [Injectable]
     public class ConfigurationRepository : IConfigurationRepository
     {
         public string GetConnectionString(DatabaseCatalog databaseCatalog)

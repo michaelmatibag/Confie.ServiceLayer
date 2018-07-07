@@ -1,10 +1,12 @@
 ﻿using System;
+using Confie.Infrastructure.DependencyResolution;
 using Confie.Infrastructure.Logging;
 using Confie.Logging.ServiceLogic.Repositories;
 using LazyCache;
 
 namespace Confie.Logging.ServiceLogic.Services
 {
+    [Injectable]
     public class LoggingService : ILoggingService
     {
         private readonly ILogRepository _logRepository;
@@ -30,7 +32,7 @@ namespace Confie.Logging.ServiceLogic.Services
             return response;
         }
 
-        public WebRequestLogResponse LogWebResponse(WebRequestLogRequest request)
+        public WebRequestLogResponse LogWebRequest(WebRequestLogRequest request)
         {
             var response = new WebRequestLogResponse()
             {
