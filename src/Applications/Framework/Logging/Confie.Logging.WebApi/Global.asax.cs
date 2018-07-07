@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Confie.Logging.WebApi.DependencyResolution;
 
 namespace Confie.Logging.WebApi
 {
@@ -7,6 +8,7 @@ namespace Confie.Logging.WebApi
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            LoggingServiceLogicFeature.DependencyBuilder();
         }
     }
 }
