@@ -30,7 +30,7 @@ namespace Confie.Logging.ServiceLogic.Services
             return response;
         }
 
-        public WebRequestLogResponse LogWebResponse(WebRequestLogRequest request)
+        public WebRequestLogResponse LogWebRequest(WebRequestLogRequest request)
         {
             var response = new WebRequestLogResponse()
             {
