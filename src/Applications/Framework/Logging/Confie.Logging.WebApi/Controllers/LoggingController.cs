@@ -5,6 +5,7 @@ using System.Web.Http.Description;
 
 namespace Confie.Logging.WebApi.Controllers
 {
+    [RoutePrefix("api")]
     public class LoggingController : ApiController
     {
         private readonly ILoggingService _loggingService;
@@ -19,7 +20,6 @@ namespace Confie.Logging.WebApi.Controllers
         [ResponseType(typeof(LogMessageResponse))]
         public IHttpActionResult LogMessageV1(LogMessageRequest request)
         {
-
             if (!request.IsValid)
             {
                 return BadRequest("Invalid request provided, please check your request body.");
