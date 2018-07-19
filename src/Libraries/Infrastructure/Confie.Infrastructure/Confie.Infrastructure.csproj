@@ -72,7 +72,6 @@
     <Compile Include="Exceptions\ApplicationConfigurationException.cs" />
     <Compile Include="Exceptions\FileOperationException.cs" />
     <Compile Include="FileRepositories\FileSystemRepository.cs" />
-    <Compile Include="FileRepositories\FileSystemRepositoryConfiguration.cs" />
     <Compile Include="FileRepositories\IFileRepository.cs" />
     <Compile Include="Logging\Executable.cs" />
     <Compile Include="Logging\ExecutableType.cs" />
