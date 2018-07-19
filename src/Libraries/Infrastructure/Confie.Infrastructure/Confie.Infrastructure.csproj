@@ -73,6 +73,7 @@
     <Compile Include="Exceptions\FileOperationException.cs" />
     <Compile Include="FileRepositories\FileSystemRepository.cs" />
     <Compile Include="FileRepositories\IFileRepository.cs" />
+    <Compile Include="FileRepositories\IFileSystemRepositoryConfiguration.cs" />
     <Compile Include="Logging\Executable.cs" />
     <Compile Include="Logging\ExecutableType.cs" />
     <Compile Include="Logging\HttpVerb.cs" />
