@@ -2,6 +2,6 @@
 {
     public interface IFileRepository
     {
-        bool CopyFile(string source, string destination);
+        void CopyFile(string source, string destination);
     }
 }
