@@ -70,6 +70,7 @@
     <Compile Include="Configuration\ITestConfiguration.cs" />
     <Compile Include="FileHandling\FixedFileHandlingTests.cs" />
     <Compile Include="FileHandling\MoneyConverterTests.cs" />
+    <Compile Include="FileRepositories\FileSystemRepositoriesTests.cs" />
     <Compile Include="JsonHandling\JsonHandlingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
