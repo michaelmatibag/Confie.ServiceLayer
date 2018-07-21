@@ -9,10 +9,10 @@ namespace Confie.Infrastructure.FileRepositories
     [Injectable]
     public class FileSystemRepository : IFileRepository
     {
-        private readonly FileSystem _fileSystem;
+        private readonly IFileSystem _fileSystem;
         private readonly IConfigurationRepository _configurationRepository;
 
-        public FileSystemRepository(FileSystem fileSystem, IConfigurationRepository configurationRepository)
+        public FileSystemRepository(IFileSystem fileSystem, IConfigurationRepository configurationRepository)
         {
             _fileSystem = fileSystem;
             _configurationRepository = configurationRepository;
