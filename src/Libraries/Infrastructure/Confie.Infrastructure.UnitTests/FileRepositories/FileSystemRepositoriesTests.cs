@@ -77,8 +77,8 @@ namespace Confie.Infrastructure.UnitTests.FileRepositories
             fileSystemRepository.CopyFile(source, destination);
 
             //Assert
-            _fileSystem.Directory.Exists(destination).ShouldBe(true);
-            _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
+            Assert.IsTrue(_fileSystem.Directory.Exists(destination));
+            Assert.IsTrue(_fileSystem.FileExists($"{destination}someFile.dat"));
         }
 
         [TestCase(true)]
@@ -97,9 +97,11 @@ namespace Confie.Infrastructure.UnitTests.FileRepositories
 
             //Act
             fileSystemRepository.CopyFile(source, destination);
-            
+
+            var result = _fileSystem.FileExists($"{destination}someFile.dat");
+
             //Assert
-            _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
+            result.ShouldBe(true);
         }
 
         private FileSystemRepository GetFileSystemRepository()
