@@ -35,18 +35,13 @@ namespace Confie.Infrastructure.FileRepositories
                 throw new FileOperationException($"The source file {source} does not exist");
             }
 
-            if (_fileSystem.File.GetAttributes(source).HasFlag(FileAttributes.Directory))
-            {
-                throw new FileOperationException($"The source file {source} is a directory and is invalid.");
-            }
-
             var fullDestination = _fileSystem.Path.Combine(destination, _fileSystem.Path.GetFileName(source));
 
             if (!_fileSystem.Directory.Exists(destination))
             {
                 _fileSystem.Directory.CreateDirectory(destination);
 
-                _fileSystem.File.Copy(source, fullDestination, true);
+                _fileSystem.File.Copy(source, fullDestination);
             }
             else
             {

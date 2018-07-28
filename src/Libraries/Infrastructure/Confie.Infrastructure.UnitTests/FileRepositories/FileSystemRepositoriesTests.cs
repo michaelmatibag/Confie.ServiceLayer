@@ -21,38 +21,85 @@ namespace Confie.Infrastructure.UnitTests.FileRepositories
             _configurationRepository = MockRepository.GenerateStub<IConfigurationRepository>();
         }
 
-        [Test]
-        public void CopyFile_ThrowsException_IfSourceIsDirectory()
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void CopyFile_ThrowsException_WhenSourceIsNullOrWhiteSpace(string input)
         {
             //Arrange
-            const string source = @"C:\source";
-            const string destination = @"C:\destination";
-
-            _fileSystem.AddDirectory(source);
-
             var fileSystemRepository = GetFileSystemRepository();
 
             //Act & Assert
-            Should.Throw<FileOperationException>(() => { fileSystemRepository.CopyFile(source, destination); }).Message
-                .ShouldBe($"The source file {source} is a directory and is invalid.");
+            Should.Throw<FileOperationException>(() => { fileSystemRepository.CopyFile(input, null); })
+                .Message.ShouldBe("The source was not specified.");
+        }
+
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void CopyFile_ThrowsException_WhenDestinationIsNullOrWhiteSpace(string input)
+        {
+            //Arrange
+            const string source = @"C:\source\someFile.dat";
+            var fileSystemRepository = GetFileSystemRepository();
+
+            //Act & Assert
+            Should.Throw<FileOperationException>(() => { fileSystemRepository.CopyFile(source, input); })
+                .Message.ShouldBe("The destination was not specified.");
         }
 
         [Test]
-        public void CopyFile_OverwritesFile_OnTrueOverwriteConfiguration()
+        public void CopyFile_ThrowsException_WhenSourceDoesNotExist()
         {
             //Arrange
-            const string source = @"C:\source\test.dat";
-            const string destination = @"C:\destination\test.dat";
-
-            _fileSystem.AddFile(source, MockFileData.NullObject);
-            _fileSystem.AddFile(destination, MockFileData.NullObject);
-            _configurationRepository.Stub(x => x.GetConfigurationValue<bool>("FileSystemRepository.Overwrite")).Return(true);
+            const string source = @"C:\source\someFile.dat";
+            const string destination = @"C:\destination";
 
             var fileSystemRepository = GetFileSystemRepository();
 
             //Act & Assert
-            Should.NotThrow(() => { fileSystemRepository.CopyFile(source, destination); });
-            _fileSystem.FileExists(destination).ShouldBe(true);
+            Should.Throw<FileOperationException>(() => { fileSystemRepository.CopyFile(source, destination); })
+                .Message.ShouldBe($"The source file {source} does not exist");
+        }
+
+        [Test]
+        public void CopyFile_CopiesFile_OnNonExistingDirectory()
+        {
+            //Arrange
+            const string source = @"C:\source\someFile.dat";
+            const string destination = @"C:\destination\";
+
+            _fileSystem.AddFile(source, MockFileData.NullObject);
+
+            var fileSystemRepository = GetFileSystemRepository();
+
+            //Act
+            fileSystemRepository.CopyFile(source, destination);
+
+            //Assert
+            _fileSystem.Directory.Exists(destination).ShouldBe(true);
+            _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
+        }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void CopyFile_CopiesFile_OnExistingDirectory(bool input)
+        {
+            //Arrange
+            const string source = @"C:\source\someFile.dat";
+            const string destination = @"C:\destination\";
+
+            _fileSystem.AddFile(source, MockFileData.NullObject);
+            _fileSystem.AddDirectory(destination);
+            _configurationRepository.Stub(x => x.GetConfigurationValue<bool>("FileSystemRepository.Overwrite")).Return(input);
+
+            var fileSystemRepository = GetFileSystemRepository();
+
+            //Act
+            fileSystemRepository.CopyFile(source, destination);
+            
+            //Assert
+            _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
         }
 
         private FileSystemRepository GetFileSystemRepository()
