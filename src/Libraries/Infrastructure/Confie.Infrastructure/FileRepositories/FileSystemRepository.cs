@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.IO.Abstractions;
+﻿using System.IO.Abstractions;
 using Confie.Infrastructure.Configuration;
 using Confie.Infrastructure.DependencyResolution;
 using Confie.Infrastructure.Exceptions;
