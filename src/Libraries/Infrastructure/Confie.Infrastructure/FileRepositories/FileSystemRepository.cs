@@ -20,29 +20,48 @@ namespace Confie.Infrastructure.FileRepositories
 
         public void CopyFile(string source, string destination)
         {
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                throw new FileOperationException("The source was not specified.");
+            }
+
+            if (string.IsNullOrWhiteSpace(destination))
+            {
+                throw new FileOperationException("The destination was not specified.");
+            }
+
+            if (!_fileSystem.File.Exists(source))
+            {
+                throw new FileOperationException($"The source file {source} does not exist");
+            }
+
             if (_fileSystem.File.GetAttributes(source).HasFlag(FileAttributes.Directory))
             {
                 throw new FileOperationException($"The source file {source} is a directory and is invalid.");
             }
 
-            if (_fileSystem.File.GetAttributes(destination).HasFlag(FileAttributes.Directory))
+            var fullDestination = _fileSystem.Path.Combine(destination, _fileSystem.Path.GetFileName(source));
+
+            if (!_fileSystem.Directory.Exists(destination))
             {
-                if (!_fileSystem.Directory.Exists(destination))
-                {
-                    _fileSystem.Directory.CreateDirectory(destination);
-                }
+                _fileSystem.Directory.CreateDirectory(destination);
 
-                var fileName = _fileSystem.Path.GetFileName(source);
-
-                _fileSystem.File.Copy(source, _fileSystem.Path.Combine(destination, fileName));
+                _fileSystem.File.Copy(source, fullDestination, true);
             }
             else
             {
                 var overwrite = _configurationRepository.GetConfigurationValue<bool>("FileSystemRepository.Overwrite");
 
-                if (!_fileSystem.File.Exists(destination) || overwrite)
+                if (overwrite)
                 {
-                    _fileSystem.File.Copy(source, destination, overwrite);
+                    _fileSystem.File.Copy(source, fullDestination, true);
+                }
+                else
+                {
+                    if (!_fileSystem.File.Exists(fullDestination))
+                    {
+                        _fileSystem.File.Copy(source, fullDestination);
+                    }
                 }
             }
         }
