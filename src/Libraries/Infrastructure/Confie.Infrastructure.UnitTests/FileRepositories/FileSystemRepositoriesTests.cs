@@ -73,12 +73,14 @@ namespace Confie.Infrastructure.UnitTests.FileRepositories
 
             var fileSystemRepository = GetFileSystemRepository();
 
-            //Act
-            fileSystemRepository.CopyFile(source, destination);
+            //Act & Assert
+            Should.NotThrow(() =>
+            {
+                fileSystemRepository.CopyFile(source, destination);
 
-            //Assert
-            Assert.IsTrue(_fileSystem.Directory.Exists(destination));
-            Assert.IsTrue(_fileSystem.FileExists($"{destination}someFile.dat"));
+                _fileSystem.Directory.Exists(destination).ShouldBe(true);
+                _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
+            });
         }
 
         [TestCase(true)]
@@ -95,13 +97,13 @@ namespace Confie.Infrastructure.UnitTests.FileRepositories
 
             var fileSystemRepository = GetFileSystemRepository();
 
-            //Act
-            fileSystemRepository.CopyFile(source, destination);
+            //Act & Assert
+            Should.NotThrow(() =>
+            {
+                fileSystemRepository.CopyFile(source, destination);
 
-            var result = _fileSystem.FileExists($"{destination}someFile.dat");
-
-            //Assert
-            result.ShouldBe(true);
+                _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
+            });
         }
 
         private FileSystemRepository GetFileSystemRepository()
