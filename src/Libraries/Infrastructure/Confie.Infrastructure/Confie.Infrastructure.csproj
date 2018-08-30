@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\IApplication.cs" />
     <Compile Include="Configuration\Configuration.cs" />
     <Compile Include="Configuration\DatabaseCatalog.cs" />
     <Compile Include="Configuration\IConfiguration.cs" />
