@@ -6,6 +6,7 @@ namespace Confie.WesternGeneral.ClaimsRepository
     {
         bool SaveClaim(Claim claim);
         bool SaveClaims(IList<Claim> claims);
+        bool SaveClaims(Claim[] claims);
         Claim GetClaim(string claimId);
         IList<Claim> GetClaims();
         bool SaveFeature(Feature feature);
