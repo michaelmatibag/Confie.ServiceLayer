@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WesternGeneral", "WesternGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confie.WesternGeneral.ServiceLogic", "src\Applications\Vendors\WesternGeneral\Confie.WesternGeneral.ServiceLogic\Confie.WesternGeneral.ServiceLogic.csproj", "{D277F729-AD58-48C1-B678-2E87EC6590C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Confie.WesternGeneral.Console", "src\Applications\Vendors\WesternGeneral\Confie.WesternGeneral.Console\Confie.WesternGeneral.Console.csproj", "{DFD3CB7B-3261-4B31-8C11-E606ED2C906C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{D277F729-AD58-48C1-B678-2E87EC6590C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D277F729-AD58-48C1-B678-2E87EC6590C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D277F729-AD58-48C1-B678-2E87EC6590C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD3CB7B-3261-4B31-8C11-E606ED2C906C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD3CB7B-3261-4B31-8C11-E606ED2C906C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD3CB7B-3261-4B31-8C11-E606ED2C906C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD3CB7B-3261-4B31-8C11-E606ED2C906C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -119,6 +125,7 @@ Global
 		{1622361F-36E5-4146-A13E-DC0AADCE4E7C} = {2AADF660-7C18-4738-9430-8E0A80D15244}
 		{9A303F52-88EB-4D3A-9E65-82CCC276BAA1} = {1622361F-36E5-4146-A13E-DC0AADCE4E7C}
 		{D277F729-AD58-48C1-B678-2E87EC6590C6} = {9A303F52-88EB-4D3A-9E65-82CCC276BAA1}
+		{DFD3CB7B-3261-4B31-8C11-E606ED2C906C} = {9A303F52-88EB-4D3A-9E65-82CCC276BAA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4BE1519-0E8F-46D8-99CE-10FE92A35802}
