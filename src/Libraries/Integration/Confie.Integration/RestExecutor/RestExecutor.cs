@@ -1,5 +1,4 @@
-﻿using System;
-using Confie.Infrastructure.Configuration;
+﻿using Confie.Infrastructure.Configuration;
 using RestSharp;
 
 namespace Confie.Integration.RestExecutor
