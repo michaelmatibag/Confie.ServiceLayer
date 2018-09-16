@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,11 +46,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyResolution\ContainerConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libraries\Domains\Vendors\Confie.WesternGeneral\Confie.WesternGeneral.csproj">
+      <Project>{BC5E4DDB-34B5-4A96-BA8F-73EDC9F2DB1C}</Project>
+      <Name>Confie.WesternGeneral</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Libraries\Infrastructure\Confie.Infrastructure\Confie.Infrastructure.csproj">
+      <Project>{495B42A0-F18F-4DE2-83BC-646A9154D2D8}</Project>
+      <Name>Confie.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Confie.WesternGeneral.ServiceLogic\Confie.WesternGeneral.ServiceLogic.csproj">
+      <Project>{d277f729-ad58-48c1-b678-2e87ec6590c6}</Project>
+      <Name>Confie.WesternGeneral.ServiceLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
