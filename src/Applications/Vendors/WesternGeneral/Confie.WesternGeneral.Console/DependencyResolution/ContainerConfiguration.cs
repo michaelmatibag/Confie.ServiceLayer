@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Confie.Infrastructure.Application;
+using Confie.Infrastructure.Configuration;
 using Confie.Infrastructure.FileHandling;
 using Confie.Infrastructure.FileRepositories;
 using Confie.WesternGeneral.ClaimsRepository;
@@ -19,6 +20,7 @@ namespace Confie.WesternGeneral.Console.DependencyResolution
             builder.RegisterType<FileSystemRepository>().As<IFileRepository>();
             builder.RegisterType<FixedFileHandling>().As<IFileHandling>();
             builder.RegisterType<ClaimsRepository.ClaimsRepository>().As<IClaimsRepository>();
+            builder.RegisterType<ConfigurationRepository>().As<IConfigurationRepository>();
 
             return builder.Build();
         }
