@@ -41,6 +41,21 @@ namespace Confie.WesternGeneral.ClaimsRepository
             }
         }
 
+        public bool SaveClaims(Claim[] claims)
+        {
+            using (var claimsContext = _claimsContextFactory.Create())
+            {
+                foreach (var claim in claims)
+                {
+                    if (claimsContext.Claims.Any(x => x.ClaimId == claim.ClaimId)) continue;
+
+                    claimsContext.Claims.Add(claim);
+                }
+
+                return claimsContext.SaveChanges() > 0;
+            }
+        }
+
         public Claim GetClaim(string claimId)
         {
             using (var claimsContext = _claimsContextFactory.Create())
