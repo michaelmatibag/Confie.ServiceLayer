@@ -1,6 +1,6 @@
 ﻿namespace Confie.Infrastructure.Factories
 {
-    public interface IFactory<T>
+    public interface IFactory<out T>
     {
         T Create();
     }

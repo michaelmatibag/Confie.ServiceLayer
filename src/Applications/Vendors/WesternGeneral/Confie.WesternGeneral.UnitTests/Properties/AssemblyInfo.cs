@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Confie.WesternGeneral.Console")]
+[assembly: AssemblyTitle("Confie.WesternGeneral.UnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Confie.WesternGeneral.Console")]
+[assembly: AssemblyProduct("Confie.WesternGeneral.UnitTests")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("dfd3cb7b-3261-4b31-8c11-e606ed2c906c")]
+[assembly: Guid("7daf30c4-9a39-43e9-b02f-161c2c4a87d5")]
 
 // Version information for an assembly consists of the following four values:
 //
