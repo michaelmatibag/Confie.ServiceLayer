@@ -57,6 +57,7 @@
     <Compile Include="ServiceLogic\Applications\ImportClaimsApplicationTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,10 @@
     <ProjectReference Include="..\Confie.WesternGeneral.Console\Confie.WesternGeneral.Console.csproj">
       <Project>{DFD3CB7B-3261-4B31-8C11-E606ED2C906C}</Project>
       <Name>Confie.WesternGeneral.Console</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Confie.WesternGeneral.ServiceLogic\Confie.WesternGeneral.ServiceLogic.csproj">
+      <Project>{D277F729-AD58-48C1-B678-2E87EC6590C6}</Project>
+      <Name>Confie.WesternGeneral.ServiceLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
