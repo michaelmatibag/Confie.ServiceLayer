@@ -37,6 +37,26 @@ namespace Confie.WesternGeneral.UnitTests.ServiceLogic.Configuration
             configuration.Source.ShouldBe(testValue);
         }
 
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase("Destination")]
+        public void ImportClaimsConfiguration_Configures_Destination(string testValue)
+        {
+            //Arrange
+            _configurationRepository
+                .Stub(x => x.GetConfigurationValue<string>("Confie.WesternGeneral.ServiceLogic.ImportClaimsApplication.Source"))
+                .Return(string.Empty);
+            _configurationRepository
+                .Stub(x => x.GetConfigurationValue<string>("Confie.WesternGeneral.ServiceLogic.ImportClaimsApplication.Destination"))
+                .Return(testValue);
+
+            //Act
+            var configuration = new ImportClaimsConfiguration(_configurationRepository);
+
+            //Assert
+            configuration.Destination.ShouldBe(testValue);
+        }
+
         [Test]
         public void ImportClaimsConfiguration_Returns_CorrectConfiguration()
         {
