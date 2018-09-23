@@ -57,6 +57,40 @@ namespace Confie.WesternGeneral.UnitTests.ServiceLogic.Configuration
             configuration.Destination.ShouldBe(testValue);
         }
 
+        [TestCase(null, null)]
+        [TestCase("", null)]
+        [TestCase("First", "First")]
+        [TestCase("First/Second", "Second")]
+        [TestCase("First\\Second", "Second")]
+        [TestCase("/First", "First")]
+        [TestCase("\\First", "First")]
+        [TestCase("/First/Second", "Second")]
+        [TestCase("\\First\\Second", "Second")]
+        [TestCase("First/", "First")]
+        [TestCase("First\\", "First")]
+        [TestCase("First/Second/", "Second")]
+        [TestCase("First\\Second\\", "Second")]
+        [TestCase("/First/", "First")]
+        [TestCase("\\First\\", "First")]
+        [TestCase("/First/Second/", "Second")]
+        [TestCase("\\First\\Second\\", "Second")]
+        public void ImportClaimsConfiguration_Configures_ClaimsFile(string testValue, string expected)
+        {
+            //Arrange
+            _configurationRepository
+                .Stub(x => x.GetConfigurationValue<string>("Confie.WesternGeneral.ServiceLogic.ImportClaimsApplication.Source"))
+                .Return(string.Empty);
+            _configurationRepository
+                .Stub(x => x.GetConfigurationValue<string>("Confie.WesternGeneral.ServiceLogic.ImportClaimsApplication.Destination"))
+                .Return(testValue);
+
+            //Act
+            var configuration = new ImportClaimsConfiguration(_configurationRepository);
+
+            //Assert
+            configuration.ClaimsFile.ShouldBe(expected);
+        }
+
         [Test]
         public void ImportClaimsConfiguration_Returns_CorrectConfiguration()
         {
