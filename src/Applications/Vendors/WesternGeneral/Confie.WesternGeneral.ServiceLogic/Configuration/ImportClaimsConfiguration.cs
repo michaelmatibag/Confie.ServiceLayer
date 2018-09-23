@@ -14,7 +14,7 @@ namespace Confie.WesternGeneral.ServiceLogic.Configuration
         {
             Source = configurationRepository.GetConfigurationValue<string>("Confie.WesternGeneral.ServiceLogic.ImportClaimsApplication.Source");
             Destination = configurationRepository.GetConfigurationValue<string>("Confie.WesternGeneral.ServiceLogic.ImportClaimsApplication.Destination");
-            ClaimsFile = Destination.Split(new[] {@"\", "/"}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
+            ClaimsFile = Destination?.Split(new[] {@"\", "/"}, StringSplitOptions.RemoveEmptyEntries).LastOrDefault();
         }
     }
 }
