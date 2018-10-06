@@ -1,5 +1,6 @@
 ﻿using System;
 using Confie.Infrastructure.Configuration;
+using Confie.Infrastructure.Exceptions;
 using NUnit.Framework;
 using Shouldly;
 
@@ -66,6 +67,15 @@ namespace Confie.Infrastructure.UnitTests.Configuration
             var result = _configurationRepository.GetConfigurationValue<bool>("TestBoolean");
 
             result.ShouldBe(true);
+        }
+
+        [Test]
+        public void GetConfigurationValue_ThrowsException_WhenKeyIsNull()
+        {
+            Should.Throw<ApplicationConfigurationException>(() =>
+            {
+                _configurationRepository.GetConfigurationValue<string>("ImaginaryKey");
+            });
         }
     }
 }
