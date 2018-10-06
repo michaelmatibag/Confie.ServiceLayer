@@ -70,11 +70,28 @@ namespace Confie.Infrastructure.UnitTests.Configuration
         }
 
         [Test]
-        public void GetConfigurationValue_ThrowsException_WhenKeyIsNull()
+        public void GetConfigurationValue_ThrowsApplicationConfigurationException_WhenKeyIsNull()
         {
             Should.Throw<ApplicationConfigurationException>(() =>
             {
                 _configurationRepository.GetConfigurationValue<string>("ImaginaryKey");
+            });
+        }
+
+        [Test]
+        public void GetConnectionString_Returns_LoggingConnectionString()
+        {
+            var result = _configurationRepository.GetConnectionString(DatabaseCatalog.Logging);
+
+            result.ShouldBe(@"Server=myServerName\myInstanceName; Database=myDataBase; User Id=myUsername; Password=myPassword;");
+        }
+
+        [Test]
+        public void GetConnectionString_ThrowsApplicationConfigurationException_WhenConnectionStringIsUnknown()
+        {
+            Should.Throw<ApplicationConfigurationException>(() =>
+            {
+                _configurationRepository.GetConnectionString(DatabaseCatalog.Unknown);
             });
         }
     }
