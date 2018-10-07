@@ -1,5 +1,6 @@
 ﻿using System;
 using Confie.Infrastructure.Configuration;
+using Confie.Infrastructure.Exceptions;
 using NUnit.Framework;
 using Shouldly;
 
@@ -66,6 +67,32 @@ namespace Confie.Infrastructure.UnitTests.Configuration
             var result = _configurationRepository.GetConfigurationValue<bool>("TestBoolean");
 
             result.ShouldBe(true);
+        }
+
+        [Test]
+        public void GetConfigurationValue_ThrowsApplicationConfigurationException_WhenKeyIsNull()
+        {
+            Should.Throw<ApplicationConfigurationException>(() =>
+            {
+                _configurationRepository.GetConfigurationValue<string>("ImaginaryKey");
+            });
+        }
+
+        [Test]
+        public void GetConnectionString_Returns_LoggingConnectionString()
+        {
+            var result = _configurationRepository.GetConnectionString(DatabaseCatalog.Logging);
+
+            result.ShouldBe(@"Server=myServerName\myInstanceName; Database=myDataBase; User Id=myUsername; Password=myPassword;");
+        }
+
+        [Test]
+        public void GetConnectionString_ThrowsApplicationConfigurationException_WhenConnectionStringIsUnknown()
+        {
+            Should.Throw<ApplicationConfigurationException>(() =>
+            {
+                _configurationRepository.GetConnectionString(DatabaseCatalog.Unknown);
+            });
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     public enum DatabaseCatalog
     {
+        Unknown,
         Logging
     }
 }
