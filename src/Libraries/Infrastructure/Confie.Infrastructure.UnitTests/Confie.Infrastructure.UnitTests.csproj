@@ -81,8 +81,10 @@
     <Compile Include="FileHandling\FixedFileHandlingTests.cs" />
     <Compile Include="FileHandling\MoneyConverterTests.cs" />
     <Compile Include="FileRepositories\FileSystemRepositoriesTests.cs" />
+    <Compile Include="JsonHandling\ConverterTests.cs" />
     <Compile Include="JsonHandling\JsonHandlingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\WebResponseTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

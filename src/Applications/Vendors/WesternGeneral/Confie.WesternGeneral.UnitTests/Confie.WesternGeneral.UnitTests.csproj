@@ -66,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libraries\Domains\Vendors\Confie.WesternGeneral\Confie.WesternGeneral.csproj">
+      <Project>{BC5E4DDB-34B5-4A96-BA8F-73EDC9F2DB1C}</Project>
+      <Name>Confie.WesternGeneral</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\Libraries\Infrastructure\Confie.Infrastructure\Confie.Infrastructure.csproj">
       <Project>{495b42a0-f18f-4de2-83bc-646a9154d2d8}</Project>
       <Name>Confie.Infrastructure</Name>

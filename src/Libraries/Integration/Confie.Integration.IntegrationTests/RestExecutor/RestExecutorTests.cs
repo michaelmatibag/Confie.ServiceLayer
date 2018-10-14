@@ -48,7 +48,7 @@ namespace Confie.Integration.IntegrationTests.RestExecutor
 
             //Assert
             result.ShouldNotBeNull();
-            result.Count.ShouldBe(100);
+            result.Count.ShouldBeGreaterThan(0);
             result[0].Title.ShouldBe("sunt aut facere repellat provident occaecati excepturi optio reprehenderit");
         }
 
