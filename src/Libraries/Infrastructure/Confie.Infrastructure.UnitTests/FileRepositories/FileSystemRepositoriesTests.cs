@@ -77,10 +77,10 @@ namespace Confie.Infrastructure.UnitTests.FileRepositories
             Should.NotThrow(() =>
             {
                 fileSystemRepository.CopyFile(source, destination);
-
-                //_fileSystem.Directory.Exists(destination).ShouldBe(true);
-                //_fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
             });
+
+            _fileSystem.Directory.Exists(destination).ShouldBe(true);
+            _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
         }
 
         [TestCase(true)]
@@ -101,9 +101,9 @@ namespace Confie.Infrastructure.UnitTests.FileRepositories
             Should.NotThrow(() =>
             {
                 fileSystemRepository.CopyFile(source, destination);
-
-                //_fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
             });
+
+            _fileSystem.FileExists($"{destination}someFile.dat").ShouldBe(true);
         }
 
         private FileSystemRepository GetFileSystemRepository()
