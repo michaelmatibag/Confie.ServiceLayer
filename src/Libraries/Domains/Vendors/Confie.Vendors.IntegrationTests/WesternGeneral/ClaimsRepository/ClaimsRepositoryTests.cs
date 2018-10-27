@@ -113,10 +113,25 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             var result = _claimsRepository.GetFeature("0004110");
 
             //Assert
-            result.ShouldNotBeNull();
-            result.ClaimId.ShouldBe("201670005692");
+            result.FeatureId.ShouldBe("0004110");
             result.UpdatedUser.ShouldBe(_updatedUser);
             result.UpdatedDate.ShouldBe(_updatedDate);
+        }
+
+        [Test]
+        public void GetFeatures_Gets_Features()
+        {
+            //Arrange
+            _claimsRepository.SaveClaim(_claim);
+
+            //Act
+            var result = _claimsRepository.GetFeatures();
+
+            //Assert
+            result.Count.ShouldBe(1);
+            result[0].FeatureId.ShouldBe("0004110");
+            result[0].UpdatedUser.ShouldBe(_updatedUser);
+            result[0].UpdatedDate.ShouldBe(_updatedDate);
         }
 
         private Claim StubClaim()
