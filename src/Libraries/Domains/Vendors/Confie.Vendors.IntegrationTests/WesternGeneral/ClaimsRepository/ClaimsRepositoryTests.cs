@@ -17,6 +17,7 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
         private Confie.WesternGeneral.ClaimsRepository.ClaimsRepository _claimsRepository;
         private string _updatedUser;
         private DateTime _updatedDate;
+        private DateTime _minDate;
         private Claim _claim;
 
         [SetUp]
@@ -27,7 +28,8 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             _claimsRepository = new Confie.WesternGeneral.ClaimsRepository.ClaimsRepository(_claimsContextFactory);
             _updatedUser = Guid.NewGuid().ToString("N");
             _updatedDate = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            _claim = StubClaim(_updatedUser, _updatedDate);
+            _minDate = DateTime.Parse(SqlDateTime.MinValue.ToString());
+            _claim = StubClaim();
 
             _claimsContext.Database.Delete();
         }
@@ -101,16 +103,30 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
             result[0].UpdatedDate.ShouldBe(_updatedDate);
         }
 
-        private static Claim StubClaim(string updatedUser, DateTime updatedDate)
+        [Test]
+        public void GetFeature_Gets_Feature()
         {
-            var minDate = DateTime.Parse(SqlDateTime.MinValue.ToString());
+            //Arrange
+            _claimsRepository.SaveClaim(_claim);
 
+            //Act
+            var result = _claimsRepository.GetFeature("0004110");
+
+            //Assert
+            result.ShouldNotBeNull();
+            result.ClaimId.ShouldBe("201670005692");
+            result.UpdatedUser.ShouldBe(_updatedUser);
+            result.UpdatedDate.ShouldBe(_updatedDate);
+        }
+
+        private Claim StubClaim()
+        {
             return new Claim
             {
                 ClaimDescription = "PD-OUR INSURED REAR ENDED OTHER PARTY  OUR INSURED",
                 ClaimId = "201670005692",
                 ClaimStatus = "RO",
-                ClosedDate = minDate,
+                ClosedDate = _minDate,
                 ClosedWithoutPayment = false,
                 DriverFirstName = "HUGO",
                 DriverLastName = "RAMIREZ",
@@ -134,14 +150,14 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
                 ReservesAtEnd = 160000,
                 SubmissionStatus = SubmissionStatus.New,
                 TotalIncurredLoss = 187000,
-                UpdatedDate = updatedDate,
-                UpdatedUser = updatedUser,
+                UpdatedDate = _updatedDate,
+                UpdatedUser = _updatedUser,
                 Features = new List<Feature>
                 {
                     new Feature
                     {
                         ClaimId = "201670005692",
-                        CloseDate = minDate,
+                        CloseDate = _minDate,
                         ClosedWithoutPayment = true,
                         CoverageCode = "PD",
                         CoverageSubCode = "PD",
@@ -154,8 +170,8 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
                         ReservesAtBeginning = 100000,
                         ReservesAtEnd = 160000,
                         TotalIncurredLoss = 187000,
-                        UpdatedDate = updatedDate,
-                        UpdatedUser = updatedUser,
+                        UpdatedDate = _updatedDate,
+                        UpdatedUser = _updatedUser,
                     }
                 },
                 PaymentTransactions = new List<PaymentTransaction>
@@ -176,8 +192,8 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
                         PaymentType = "Expense",
                         PaymentZip = "91302",
                         RecoveryType = string.Empty,
-                        UpdatedDate = updatedDate,
-                        UpdatedUser = updatedUser
+                        UpdatedDate = _updatedDate,
+                        UpdatedUser = _updatedUser
                     }
                 },
                 ReserveTransactions = new List<ReserveTransaction>
@@ -191,8 +207,8 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
                         ReserveBefore = 0,
                         ReserveChangeDate = DateTime.Parse("11/2/2016 12:01:00 AM"),
                         ReserveTransactionId = 0,
-                        UpdatedDate = updatedDate,
-                        UpdatedUser = updatedUser
+                        UpdatedDate = _updatedDate,
+                        UpdatedUser = _updatedUser
                     },
                     new ReserveTransaction
                     {
@@ -203,8 +219,8 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
                         ReserveBefore = 0,
                         ReserveChangeDate = DateTime.Parse("12/13/2016 12:02:00 AM"),
                         ReserveTransactionId = 0,
-                        UpdatedDate = updatedDate,
-                        UpdatedUser = updatedUser
+                        UpdatedDate = _updatedDate,
+                        UpdatedUser = _updatedUser
                     },
                     new ReserveTransaction
                     {
@@ -215,9 +231,35 @@ namespace Confie.Vendors.IntegrationTests.WesternGeneral.ClaimsRepository
                         ReserveBefore = 0,
                         ReserveChangeDate = DateTime.Parse("2/16/2018 12:03:00 AM"),
                         ReserveTransactionId = 0,
-                        UpdatedDate = updatedDate,
-                        UpdatedUser = updatedUser
+                        UpdatedDate = _updatedDate,
+                        UpdatedUser = _updatedUser
                     }
+                }
+            };
+        }
+
+        private IList<Feature> StubFeatures()
+        {
+            return new List<Feature>
+            {
+                new Feature
+                {
+                    ClaimId = "201670005692",
+                    CloseDate = _minDate,
+                    ClosedWithoutPayment = true,
+                    CoverageCode = "PD",
+                    CoverageSubCode = "PD",
+                    Expenses = 27000,
+                    FeatureId = "0004110",
+                    FeatureStatus = "RE-OPENED",
+                    OpenDate = DateTime.Parse("10/24/2016 12:01:00 AM"),
+                    Payments = 0,
+                    Recoveries = 0,
+                    ReservesAtBeginning = 100000,
+                    ReservesAtEnd = 160000,
+                    TotalIncurredLoss = 187000,
+                    UpdatedDate = _updatedDate,
+                    UpdatedUser = _updatedUser
                 }
             };
         }
