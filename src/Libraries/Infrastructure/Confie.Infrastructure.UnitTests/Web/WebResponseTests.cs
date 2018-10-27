@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
 using Confie.Infrastructure.Logging;
 using Confie.Infrastructure.Web;
 using NUnit.Framework;
@@ -10,10 +12,12 @@ namespace Confie.Infrastructure.UnitTests.Web
     public class WebResponseTests
     {
         private WebResponse<WebRequestLogRequest> _response;
+        private static DateTime _timestamp;
 
         [SetUp]
         public void Setup()
         {
+            _timestamp = DateTime.Now;
             _response = BuildWebResponse();
         }
 
@@ -23,7 +27,23 @@ namespace Confie.Infrastructure.UnitTests.Web
             //Assert
             _response.Request.ShouldNotBeNull();
             _response.Request.ShouldBeOfType<WebRequestLogRequest>();
+            _response.Request.WebRequest.RequestUrl.ShouldNotBeNull();
+            _response.Request.WebRequest.RequestUrl.RequestUrlId.ShouldBe(8);
+            _response.Request.WebRequest.RequestUrl.Url.ShouldBe("TestUrl");
+            _response.Request.WebRequest.RequestHttpVerbId.ShouldBe(HttpVerb.PUT);
+            _response.Request.WebRequest.RequestTimestamp.ShouldBe(_timestamp);
+            _response.Request.WebRequest.RequesterIpAddress.ShouldNotBeNull();
+            _response.Request.WebRequest.RequesterIpAddress.Address.ShouldBe("TestAddress");
+            _response.Request.WebRequest.RequesterIpAddress.IpAddressId.ShouldBe(8);
+            _response.Request.WebRequest.RequesterExecutable.ShouldNotBeNull();
+            _response.Request.WebRequest.RequesterExecutable.ExecutableId.ShouldBe(8);
+            _response.Request.WebRequest.RequesterExecutable.ExecutableName.ShouldBe("TestExecutableName");
+            _response.Request.WebRequest.RequesterExecutable.ExecutableTypeId.ShouldBe(ExecutableType.ConsoleApplication);
+            _response.Request.WebRequest.ResponseTimestamp.ShouldBe(_timestamp);
+            _response.Request.WebRequest.ResponseHttpStatusCode.ShouldBe(HttpStatusCode.OK);
+            _response.Request.WebRequest.Request.ShouldBe("TestRequest");
             _response.Request.WebRequest.Response.ShouldBe("TestResponse");
+            _response.Request.WebRequest.ResponseIsCached.ShouldBe(true);
         }
 
         [Test]
@@ -73,7 +93,29 @@ namespace Confie.Infrastructure.UnitTests.Web
                 {
                     WebRequest = new WebRequestLogEntry
                     {
-                        Response = "TestResponse"
+                        RequestUrl = new RequestUrl
+                        {
+                            RequestUrlId = 8,
+                            Url = "TestUrl"
+                        },
+                        RequestHttpVerbId = HttpVerb.PUT,
+                        RequestTimestamp = _timestamp,
+                        RequesterIpAddress = new IpAddress
+                        {
+                            Address = "TestAddress",
+                            IpAddressId = 8
+                        },
+                        RequesterExecutable = new Executable
+                        {
+                            ExecutableId = 8,
+                            ExecutableName = "TestExecutableName",
+                            ExecutableTypeId = ExecutableType.ConsoleApplication
+                        },
+                        ResponseTimestamp = _timestamp,
+                        ResponseHttpStatusCode = HttpStatusCode.OK,
+                        Request = "TestRequest",
+                        Response = "TestResponse",
+                        ResponseIsCached = true
                     }
                 }
             };
